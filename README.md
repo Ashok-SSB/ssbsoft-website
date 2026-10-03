@@ -1,0 +1,25 @@
+# SSB Soft website
+
+Single-page marketing site for [ssbsoft.com](https://ssbsoft.com). Plain HTML, CSS and vanilla JavaScript — no build step.
+
+```
+index.html      page markup
+css/style.css   styles
+js/main.js      animation and interactions
+assets/img      photos, brand logos, favicon, social share image
+assets/logos    client logos
+```
+
+## Run locally
+
+```bash
+python3 -m http.server 5173
+```
+
+Then open http://localhost:5173.
+
+## Before going live
+
+- The contact form opens the visitor's email app. To post to a backend instead, add `data-endpoint="https://…"` to the `<form>` in `index.html`.
+- The social share tags point to `https://ssbsoft.com/assets/img/og-image.jpg`, so deploy the `assets` folder at the site root.
+- Bump the `?v=` on the stylesheet and script links in `index.html` when you change them, so browsers fetch the new files.
