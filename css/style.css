@@ -760,10 +760,52 @@ html:not(.js) .services__panels { display: grid; gap: 48px; }
 html:not(.js) .marquee__track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; row-gap: 28px; }
 html:not(.js) .slider__controls, html:not(.js) .theme, html:not(.js) .hero__scroll { display: none; }
 
+/* ==========================================================
+   Flow — continuous, scroll-linked motion
+   ========================================================== */
+html.lenis, html.lenis body { height: auto; }
+html.lenis { scroll-behavior: auto; }
+.lenis.lenis-stopped { overflow: clip; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* fluid gutters and type that scale continuously with the window */
+.container { width: min(1200px, 100% - clamp(32px, 5vw, 80px)); }
+body { font-size: clamp(15.5px, .9rem + .15vw, 17px); }
+
+/* the hero hands over to the page with the same fold as the logo */
+.hero { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 3.2vw), 0 100%); }
+.hero__content { will-change: transform, opacity; transform-origin: 50% 0; }
+.marquee__track { will-change: transform; }
+
+/* images fade in as they arrive */
+img { transition: opacity .6s var(--ease); }
+:where(.js) img[loading="lazy"]:not(.is-loaded) { opacity: 0 !important; }
+
+/* Scroll-linked reveals: content rises with your scroll and rewinds when you scroll back.
+   Browsers without scroll timelines keep the one-time reveal above. */
+@supports (animation-timeline: view()) {
+  .js main > section:not(.hero) .reveal {
+    opacity: 1; transform: none; transition: none;
+    animation: flowIn linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
+  }
+  .js .section__head .reveal, .js .about__text .reveal { animation-range: entry 0% cover 22%; }
+  .js .cases .case:nth-child(3n + 2), .js .features .feature:nth-child(4n + 2) { animation-range: entry 4% cover 31%; }
+  .js .cases .case:nth-child(3n + 3), .js .features .feature:nth-child(4n + 3) { animation-range: entry 8% cover 34%; }
+  .js .features .feature:nth-child(4n + 4) { animation-range: entry 12% cover 37%; }
+  .js .stat { animation-range: entry 0% cover 20%; }
+  /* the founder photo and section headings drift a little slower than the page */
+  .js main .about .about__photo.reveal { animation: drift linear both; animation-timeline: view(); animation-range: cover; }
+}
+@keyframes flowIn { from { opacity: 0; transform: translateY(44px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes drift { from { transform: translateY(40px); } to { transform: translateY(-40px); } }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
-  .js .reveal { opacity: 1; transform: none; }
+  .js .reveal { opacity: 1; transform: none; animation: none !important; }
+  .js .about__photo { animation: none !important; }
   .js .hero__title .line > * { transform: none; }
   .marquee__track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
   .js .mark .f, .js .mark__word { opacity: 1; transform: none; }

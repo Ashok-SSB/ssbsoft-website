@@ -9,6 +9,8 @@ css/style.css    styles, light + dark theme tokens
 css/print.css    print layout (a one-page company profile)
 js/main.js       core behaviour: hero, nav, tabs, slider, form, theme switch
 js/delight.js    micro-interactions (button light, card glow, ticks, copy email…)
+js/flow.js       momentum scrolling, scroll-linked hero and logo strip, image fade-in
+assets/vendor    Lenis smooth-scroll library (MIT), self-hosted
 assets/fonts     self-hosted Inter, Plus Jakarta Sans and the signature font
 assets/icons     isometric brand icons (also inlined in index.html)
 assets/img       photos, brand logos, favicon, social share image

@@ -62,7 +62,8 @@
       Math.sin(x * .0009 + time * .35 + k * .07) * .8;
 
     const draw = () => {
-      if (!reduceMotion) t += .0045;
+      // lines flow faster while the page is moving, then settle
+      if (!reduceMotion) t += .0045 + Math.min(Math.abs(window.ssbFlow?.velocity || 0) * .0009, .02);
       pointer.x += (target.x - pointer.x) * .04;
       pointer.y += (target.y - pointer.y) * .04;
       ctx.clearRect(0, 0, W, H);
@@ -211,7 +212,9 @@
     bar.style.height = a.offsetHeight + "px";
     bar.style.transform = `translate(${a.offsetLeft}px, ${a.offsetTop}px)`;
   };
+  const panelsWrap = $(".services__panels");
   const activate = (tab, focus) => {
+    const from = panelsWrap?.offsetHeight;
     tabs.forEach((t) => {
       const on = t === tab;
       t.classList.toggle("is-active", on);
@@ -223,6 +226,11 @@
     });
     if (focus) tab.focus();
     placeBar();
+    // glide between panel heights instead of jumping
+    const to = panelsWrap?.offsetHeight;
+    if (from && to && from !== to && !reduceMotion) {
+      panelsWrap.animate([{ height: from + "px" }, { height: to + "px" }], { duration: 450, easing: "cubic-bezier(.2,.7,.2,1)" });
+    }
   };
   tabs.forEach((t, i) => {
     t.tabIndex = t.classList.contains("is-active") ? 0 : -1;
@@ -429,10 +437,12 @@
       const apply = () => { root.dataset.theme = next; try { localStorage.setItem("theme", next); } catch {} label(); };
       if (!document.startViewTransition || reduceMotion) { apply(); return; }
       const r = Math.hypot(Math.max(e.clientX, innerWidth - e.clientX), Math.max(e.clientY, innerHeight - e.clientY));
-      document.startViewTransition(apply).ready.then(() => {
+      const vt = document.startViewTransition(apply);
+      vt.finished.catch(() => {}); // aborted when the tab is hidden; the theme still applies
+      vt.ready.then(() => {
         root.animate({ clipPath: [`circle(0 at ${e.clientX}px ${e.clientY}px)`, `circle(${r}px at ${e.clientX}px ${e.clientY}px)`] },
           { duration: 650, easing: "cubic-bezier(.6,0,.2,1)", pseudoElement: "::view-transition-new(root)" });
-      });
+      }).catch(() => {});
     });
   }
 
