@@ -9,6 +9,7 @@ css/style.css    styles, light + dark theme tokens
 css/print.css    print layout (a one-page company profile)
 js/main.js       core behaviour: hero, nav, tabs, slider, form, theme switch
 js/delight.js    micro-interactions (button light, card glow, ticks, copy email…)
+js/form.js       contact form personality (focus line, email greeting, phone format, chips, hints)
 js/codefield.js  faint code behind "Engineering partners", lit by a light that follows the pointer
 js/flow.js       momentum scrolling, scroll-linked hero and logo strip, image fade-in
 assets/vendor    Lenis smooth-scroll library (MIT), self-hosted

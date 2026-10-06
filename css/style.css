@@ -1053,6 +1053,47 @@ html:not(.js) .slotcard__ok svg { stroke-dashoffset: 0; }
   .slotcard { justify-self: center; }
 }
 
+/* ==========================================================
+   Contact form — personality
+   ========================================================== */
+/* 1. a thin line draws around the field on focus; the label floats with a bounce */
+.field__line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.field__line rect { width: calc(100% - 2px); height: calc(100% - 2px); fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .35s var(--ease); }
+.field:focus-within .field__line rect { stroke-dashoffset: 0; transition: stroke-dashoffset .75s cubic-bezier(.65, 0, .25, 1); }
+.field input:focus, .field textarea:focus { border-color: transparent; }
+.field label { transition: transform .45s var(--spring), color .25s; }
+
+/* 2. greeting under the email */
+.field__note { display: grid; grid-template-rows: 0fr; margin-top: -18px; transition: grid-template-rows .45s var(--ease), margin .45s var(--ease); }
+.field__note > p { overflow: hidden; margin: 0; padding-left: 4px; font-size: .88rem; font-weight: 500; color: var(--ink-3); opacity: 0; transform: translateY(-4px); transition: opacity .35s var(--ease), transform .45s var(--spring); }
+.field__note.is-on { grid-template-rows: 1fr; margin-top: -8px; }
+.field__note.is-on > p { opacity: 1; transform: none; }
+
+/* 4. quick-start chips */
+.msg-aids { margin-top: -6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.chip {
+  padding: .45rem .85rem; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+  font: 500 .82rem/1 var(--font-body); color: var(--ink-3); cursor: pointer;
+  transition: border-color .25s, background .25s, color .25s, transform .35s var(--spring);
+}
+.chip:hover { border-color: rgba(220, 38, 38, .45); color: var(--accent); transform: translateY(-2px); }
+.chip:active { transform: scale(.95); }
+.chip.is-on { background: rgba(220, 38, 38, .08); border-color: var(--accent); color: var(--accent); }
+
+/* 5. encouraging hint and typed examples */
+.msg-aids .field__hint { margin: 0 2px; transition: opacity .16s, transform .25s var(--ease), color .3s; }
+.field__hint.is-swapping { opacity: 0; transform: translateY(3px); }
+.field__hint.is-good { color: #15803d; }
+.field__ghost { position: absolute; left: 19px; right: 18px; top: 24px; pointer-events: none; font: inherit; color: var(--faint); white-space: pre-wrap; line-height: 1.65; }
+.field__ghost:not(:empty)::after { content: ""; display: inline-block; width: 1px; height: 1em; margin-left: 1px; vertical-align: -.15em; background: var(--faint); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* 6. send button: muted until ready, one shine when it wakes */
+.btn.is-sleepy { filter: saturate(.55) brightness(1.05); box-shadow: none; }
+.btn.wake::after { display: block; animation: wakeShine .9s var(--ease); }
+@keyframes wakeShine { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
