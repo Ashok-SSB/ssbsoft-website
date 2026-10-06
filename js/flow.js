@@ -77,4 +77,50 @@
     if (img.complete && img.naturalWidth) done();
     else { img.addEventListener("load", done, { once: true }); img.addEventListener("error", done, { once: true }); }
   });
+
+  /* ---------- Text that flows like a breeze ----------
+     Headings: words drift up and come into focus one after another.
+     Paragraphs: words stay put and brighten as you read down the page.
+     Both are tied to scroll position, so scrolling back rewinds them. */
+  const HEADINGS = ".section__head h2, .about__text h2, .cta h2, .contact__form-wrap h2";
+  const PARAGRAPHS = ".section__head .section__lede, .about__text > p:not(.kicker), .note p, .cta__inner > p, .contact__form-wrap > .section__lede";
+
+  const splitWords = (el) => {
+    const words = [];
+    const walk = (node) => {
+      [...node.childNodes].forEach((child) => {
+        if (child.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          child.textContent.split(/( +)/).forEach((part) => {
+            if (!part) return;
+            if (/^ +$/.test(part)) { frag.append(part); return; }
+            const w = document.createElement("span");
+            w.className = "w";
+            w.textContent = part;
+            frag.append(w);
+            words.push(w);
+          });
+          child.replaceWith(frag);
+        } else if (child.nodeType === 1 && !child.matches("svg, .w")) {
+          walk(child);
+        }
+      });
+    };
+    walk(el);
+    words.forEach((w, i) => w.style.setProperty("--p", (i / Math.max(words.length - 1, 1)).toFixed(3)));
+    return words.length;
+  };
+
+  if (!reduceMotion) {
+    $$(HEADINGS).forEach((el) => { el.classList.add("breeze", "breeze--head"); el.classList.remove("reveal"); splitWords(el); });
+    $$(PARAGRAPHS).forEach((el) => { el.classList.add("breeze", "breeze--text"); el.classList.remove("reveal"); splitWords(el); });
+
+    // browsers without scroll timelines: play the same motion once, when the text arrives
+    if (!CSS.supports("animation-timeline: view()")) {
+      const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+      }), { rootMargin: "0px 0px -12% 0px" });
+      $$(".breeze").forEach((el) => io.observe(el));
+    }
+  }
 })();

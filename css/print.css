@@ -21,3 +21,4 @@ html, body { background: #fff !important; color: #111 !important; font-size: 11p
 details > .faq__body { display: block !important; }
 .cases, .features { grid-template-columns: repeat(2, 1fr) !important; }
 .contact__mail a { color: #b91c1c !important; }
+.breeze .w { opacity: 1 !important; transform: none !important; filter: none !important; }

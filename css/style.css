@@ -796,6 +796,37 @@ img { transition: opacity .6s var(--ease); }
 @keyframes flowIn { from { opacity: 0; transform: translateY(44px) scale(.985); } to { opacity: 1; transform: none; } }
 @keyframes drift { from { transform: translateY(40px); } to { transform: translateY(-40px); } }
 
+/* ==========================================================
+   Breeze — text flows in word by word with the scroll
+   ========================================================== */
+.breeze .w { display: inline-block; text-indent: 0; }
+/* containers that hold breezing text stay still, so the words carry the motion */
+.js .cta__inner.reveal, .js .contact__form-wrap.reveal, .js .note.reveal { opacity: 1; transform: none; animation: none; transition: none; }
+
+@supports (animation-timeline: view()) {
+  /* headings: each word lifts a little and comes into focus, left to right */
+  .js .breeze--head .w {
+    animation: breezeHead linear both;
+    animation-timeline: view();
+    animation-range: cover calc(4% + var(--p) * 14%) cover calc(20% + var(--p) * 14%);
+  }
+  /* paragraphs: words brighten in reading order as the text moves up the screen */
+  .js .breeze--text .w {
+    animation: breezeText linear both;
+    animation-timeline: view();
+    animation-range: cover calc(8% + var(--p) * 22%) cover calc(16% + var(--p) * 22%);
+  }
+}
+@keyframes breezeHead { from { opacity: 0; transform: translateY(.38em); filter: blur(5px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes breezeText { from { opacity: .16; } to { opacity: 1; } }
+
+/* same motion, played once, where scroll timelines aren't available */
+@supports not (animation-timeline: view()) {
+  .js .breeze--head .w { opacity: 0; transform: translateY(.38em); filter: blur(5px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); transition-delay: calc(var(--p) * .45s); }
+  .js .breeze--text .w { opacity: .16; transition: opacity .8s var(--ease); transition-delay: calc(var(--p) * .9s); }
+  .js .breeze.is-in .w { opacity: 1; transform: none; filter: none; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
