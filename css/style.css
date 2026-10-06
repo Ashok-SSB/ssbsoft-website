@@ -639,9 +639,6 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 .iso .mk { fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 .iso .kh { fill: #450a0a; }
 
-/* ---- Angled section edges echo the ribbon's folds ---- */
-.section--angled { z-index: 1; clip-path: polygon(0 3.2vw, 100% 0, 100% calc(100% - 3.2vw), 0 100%); margin-block: -3.2vw; padding-block: calc(clamp(80px, 11vw, 130px) + 3.2vw); }
-.section--angled-top { position: relative; z-index: 1; clip-path: polygon(0 0, 100% 3.2vw, 100% 100%, 0 100%); margin-top: -3.2vw; padding-top: calc(clamp(72px, 9vw, 110px) + 3.2vw); }
 .iso-grid {
   position: absolute; inset: 0; pointer-events: none;
   background:
