@@ -195,6 +195,28 @@
     }
   }
 
+  /* ---------- FAQ: cards that flip to reveal the answer ---------- */
+  $$(".flip").forEach((card) => {
+    const back = $(".flip__back", card), inner = $(".flip__inner", card);
+    back.setAttribute("aria-hidden", "true");
+    card.addEventListener("click", () => {
+      const open = !card.classList.contains("is-flipped");
+      card.classList.toggle("is-flipped", open);
+      card.setAttribute("aria-expanded", open);
+      back.setAttribute("aria-hidden", !open);
+      card.classList.remove("is-turning"); void card.offsetWidth; card.classList.add("is-turning");
+    });
+    if (finePointer && !reduceMotion) {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--tx", (((e.clientX - r.left) / r.width - .5) * 8).toFixed(2) + "deg");
+        card.style.setProperty("--ty", (((e.clientY - r.top) / r.height - .5) * -8).toFixed(2) + "deg");
+      });
+      card.addEventListener("pointerleave", () => { card.style.setProperty("--tx", "0deg"); card.style.setProperty("--ty", "0deg"); });
+    }
+    inner.addEventListener("animationend", () => card.classList.remove("is-turning"));
+  });
+
   /* ---------- A hello for the curious ---------- */
   console.log(
     "%cSSB Soft%c\nCurious how this page was built? We like people who look under the hood.\nSay hello: contact@ssbsoft.com",

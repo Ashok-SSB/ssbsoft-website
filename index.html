@@ -29,7 +29,7 @@
   </script>
   <link rel="preload" href="assets/fonts/jakarta-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=32" />
+  <link rel="stylesheet" href="css/style.css?v=34" />
   <link rel="stylesheet" href="css/print.css?v=1" media="print" />
 </head>
 <body>
@@ -518,22 +518,61 @@
 
         <div class="faq reveal" style="--d:.15s">
           <h3>Frequently asked questions</h3>
-          <details open>
-            <summary>How fast can you deliver an MVP?</summary>
-            <div class="faq__body"><p>Most MVPs are delivered in&nbsp;3&nbsp;weeks. We focus on the feature set that proves value so you can raise or validate quickly.</p></div>
-          </details>
-          <details>
-            <summary>What is Staff Augmentation?</summary>
-            <div class="faq__body"><p>We embed vetted engineers directly into your team. They stay long term and ensure continuity without churn.</p></div>
-          </details>
-          <details>
-            <summary>What if I want to own the team later?</summary>
-            <div class="faq__body"><p>You always have the option to transition the embedded team into your own, with full knowledge transfer and zero disruption.</p></div>
-          </details>
-          <details>
-            <summary>Do I lose control of my IP?</summary>
-            <div class="faq__body"><p>No. You own the code, the process and — under BOT (Build-Operate-Transfer) — the people as well.</p></div>
-          </details>
+          <p class="faq__lede">Tap a card to flip it.</p>
+          <div class="flips">
+            <button type="button" class="flip" aria-expanded="false" aria-controls="faq-a1">
+              <span class="flip__inner">
+                <span class="flip__face flip__front">
+                  <span class="flip__top"><span class="flip__num">01</span><svg class="flip__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2.5 5 13.5h6l-1 8 8-11h-6l1-8z"/></svg></span>
+                  <span class="flip__q">How fast can you deliver an MVP?</span>
+                  <span class="flip__hint" aria-hidden="true">Flip <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+                <span class="flip__face flip__back" id="faq-a1">
+                  <span class="flip__a">Most MVPs are delivered in&nbsp;3&nbsp;weeks. We focus on the feature set that proves value so you can raise or validate quickly.</span>
+                  <span class="flip__hint" aria-hidden="true">Back <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+              </span>
+            </button>
+            <button type="button" class="flip" aria-expanded="false" aria-controls="faq-a2">
+              <span class="flip__inner">
+                <span class="flip__face flip__front">
+                  <span class="flip__top"><span class="flip__num">02</span><svg class="flip__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c.7-3.3 2.9-5.2 5.5-5.2s4.8 1.9 5.5 5.2"/><circle cx="16.6" cy="9" r="2.6"/><path d="M15.6 14.4c2.5-.2 4.4 1.4 5 4.4"/></svg></span>
+                  <span class="flip__q">What is Staff Augmentation?</span>
+                  <span class="flip__hint" aria-hidden="true">Flip <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+                <span class="flip__face flip__back" id="faq-a2">
+                  <span class="flip__a">We embed vetted engineers directly into your team. They stay long term and ensure continuity without churn.</span>
+                  <span class="flip__hint" aria-hidden="true">Back <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+              </span>
+            </button>
+            <button type="button" class="flip" aria-expanded="false" aria-controls="faq-a3">
+              <span class="flip__inner">
+                <span class="flip__face flip__front">
+                  <span class="flip__top"><span class="flip__num">03</span><svg class="flip__icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15.5" r="4.2"/><path d="M11.1 12.4l8.6-8.6M16.8 6.7l2.4 2.4M14.5 9l1.8 1.8"/></svg></span>
+                  <span class="flip__q">What if I want to own the team later?</span>
+                  <span class="flip__hint" aria-hidden="true">Flip <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+                <span class="flip__face flip__back" id="faq-a3">
+                  <span class="flip__a">You always have the option to transition the embedded team into your own, with full knowledge transfer and zero disruption.</span>
+                  <span class="flip__hint" aria-hidden="true">Back <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+              </span>
+            </button>
+            <button type="button" class="flip" aria-expanded="false" aria-controls="faq-a4">
+              <span class="flip__inner">
+                <span class="flip__face flip__front">
+                  <span class="flip__top"><span class="flip__num">04</span><svg class="flip__icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l7.2 3v5.6c0 4.5-3 8-7.2 9.8-4.2-1.8-7.2-5.3-7.2-9.8V5.8z"/><path d="M8.8 12.1l2.3 2.3 4.2-4.4"/></svg></span>
+                  <span class="flip__q">Do I lose control of my IP?</span>
+                  <span class="flip__hint" aria-hidden="true">Flip <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+                <span class="flip__face flip__back" id="faq-a4">
+                  <span class="flip__a">No. You own the code, the process and — under BOT (Build-Operate-Transfer) — the people as well.</span>
+                  <span class="flip__hint" aria-hidden="true">Back <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg></span>
+                </span>
+              </span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -565,7 +604,7 @@
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="js/flow.js?v=4" defer></script>
   <script src="js/main.js?v=9" defer></script>
-  <script src="js/delight.js?v=9" defer></script>
+  <script src="js/delight.js?v=10" defer></script>
   <script src="js/codefield.js?v=1" defer></script>
   <script src="js/form.js?v=1" defer></script>
 </body>
