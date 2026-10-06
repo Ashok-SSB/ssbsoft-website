@@ -10,7 +10,7 @@
   <script>document.documentElement.classList.add("js");</script>
   <!-- absolute paths: this page is served for any missing URL -->
   <link rel="preload" href="/assets/fonts/jakarta-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="/css/style.css?v=8" />
+  <link rel="stylesheet" href="/css/style.css?v=10" />
   <style>
     body { background: var(--ink); color: rgba(255,255,255,.72); }
     .lost { position: relative; min-height: 100vh; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 48px 20px; overflow: hidden; }
@@ -33,23 +33,51 @@
     <div class="lost__inner">
       <a class="hero__logo-wrap" href="/" aria-label="SSB Soft home">
   <svg class="mark" viewBox="-2 -2 734 708" role="img" aria-label="SSB Soft">
-    <g class="mark__facets">
-      <polygon class="f f--d" style="--i:0" points="121,131 0,198 0,261 121,195"/>
-      <polygon class="f f--l" style="--i:1" points="0,325 0,390 122,456 122,393"/>
-      <polygon class="f f--l" style="--i:2" points="0,262 179,360 243,324 69,225"/>
-      <polygon class="f f--l" style="--i:3" points="123,131 123,196 243,261 243,198"/>
-      <polygon class="f f--d" style="--i:4" points="244,325 123,393 123,455 244,389"/>
-      <polygon class="f f--d" style="--i:5" points="364,0 244,70 244,135 364,67"/>
-      <polygon class="f f--m" style="--i:6" points="245,199 245,262 365,329 365,266"/>
-      <polygon class="f f--m" style="--i:7" points="244,135 423,234 487,198 311,98"/>
-      <polygon class="f f--m" style="--i:8" points="366,0 366,67 486,137 486,71"/>
-      <polygon class="f f--d" style="--i:9" points="486,198 367,266 367,328 487,263"/>
-      <polygon class="f f--l" style="--i:10" points="488,72 488,139 608,206 608,141"/>
-      <polygon class="f f--m" style="--i:11" points="546,173 547,421 608,455 608,207"/>
-      <polygon class="f f--d" style="--i:12" points="610,142 610,207 730,272 730,209"/>
-      <polygon class="f f--l" style="--i:13" points="730,273 672,242 611,275 667,307"/>
-      <polygon class="f f--d" style="--i:14" points="610,276 610,341 730,407 730,343"/>
-      <polygon class="f f--l" style="--i:15" points="730,407 660,374 610,395 610,455"/>
+    <defs>
+      <linearGradient id="mk-edge" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#fff"/><stop offset=".8" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <mask id="mk-reveal" maskUnits="userSpaceOnUse" x="-2.0" y="-2.0" width="734.0" height="708.0">
+        <rect class="mark__wipe" x="-956" y="-2.0" width="954" height="708.0" fill="url(#mk-edge)">
+          <animate attributeName="x" from="-956" to="-2" begin="0.5s" dur="0.95s" fill="freeze" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .2 1"/>
+        </rect>
+      </mask>
+    </defs>
+    <g class="mark__fill" mask="url(#mk-reveal)">
+        <polygon class="f f--d" points="121,131 0,198 0,261 121,195"/>
+        <polygon class="f f--l" points="0,325 0,390 122,456 122,393"/>
+        <polygon class="f f--l" points="0,262 179,360 243,324 69,225"/>
+        <polygon class="f f--l" points="123,131 123,196 243,261 243,198"/>
+        <polygon class="f f--d" points="244,325 123,393 123,455 244,389"/>
+        <polygon class="f f--d" points="364,0 244,70 244,135 364,67"/>
+        <polygon class="f f--m" points="245,199 245,262 365,329 365,266"/>
+        <polygon class="f f--m" points="244,135 423,234 487,198 311,98"/>
+        <polygon class="f f--m" points="366,0 366,67 486,137 486,71"/>
+        <polygon class="f f--d" points="486,198 367,266 367,328 487,263"/>
+        <polygon class="f f--l" points="488,72 488,139 608,206 608,141"/>
+        <polygon class="f f--m" points="546,173 547,421 608,455 608,207"/>
+        <polygon class="f f--d" points="610,142 610,207 730,272 730,209"/>
+        <polygon class="f f--l" points="730,273 672,242 611,275 667,307"/>
+        <polygon class="f f--d" points="610,276 610,341 730,407 730,343"/>
+        <polygon class="f f--l" points="730,407 660,374 610,395 610,455"/>
+    </g>
+    <g class="mark__lines" aria-hidden="true">
+        <polygon class="o" style="--i:0" points="121,131 0,198 0,261 121,195" pathLength="1"/>
+        <polygon class="o" style="--i:1" points="0,325 0,390 122,456 122,393" pathLength="1"/>
+        <polygon class="o" style="--i:2" points="0,262 179,360 243,324 69,225" pathLength="1"/>
+        <polygon class="o" style="--i:3" points="123,131 123,196 243,261 243,198" pathLength="1"/>
+        <polygon class="o" style="--i:4" points="244,325 123,393 123,455 244,389" pathLength="1"/>
+        <polygon class="o" style="--i:5" points="364,0 244,70 244,135 364,67" pathLength="1"/>
+        <polygon class="o" style="--i:6" points="245,199 245,262 365,329 365,266" pathLength="1"/>
+        <polygon class="o" style="--i:7" points="244,135 423,234 487,198 311,98" pathLength="1"/>
+        <polygon class="o" style="--i:8" points="366,0 366,67 486,137 486,71" pathLength="1"/>
+        <polygon class="o" style="--i:9" points="486,198 367,266 367,328 487,263" pathLength="1"/>
+        <polygon class="o" style="--i:10" points="488,72 488,139 608,206 608,141" pathLength="1"/>
+        <polygon class="o" style="--i:11" points="546,173 547,421 608,455 608,207" pathLength="1"/>
+        <polygon class="o" style="--i:12" points="610,142 610,207 730,272 730,209" pathLength="1"/>
+        <polygon class="o" style="--i:13" points="730,273 672,242 611,275 667,307" pathLength="1"/>
+        <polygon class="o" style="--i:14" points="610,276 610,341 730,407 730,343" pathLength="1"/>
+        <polygon class="o" style="--i:15" points="730,407 660,374 610,395 610,455" pathLength="1"/>
     </g>
     <path class="mark__word" fill-rule="evenodd" d="M259,557 256,564 256,635 259,641 271,651 284,656 306,660 360,660 375,658 391,653 403,646 408,640 411,633 411,566 405,554 397,548 379,541 360,538 307,538 278,544 265,551Z M284,559 294,550 310,546 356,546 367,548 377,553 382,558 386,569 386,629 382,640 370,649 357,652 310,652 291,646 284,639 281,632 281,566Z M69,560 67,566 68,577 75,586 83,591 111,598 175,600 187,605 193,611 197,620 197,633 190,644 181,649 168,652 80,652 80,660 180,659 205,652 219,641 222,635 222,616 219,610 209,601 195,595 173,591 125,591 111,589 100,584 95,579 92,570 95,555 107,548 118,546 209,546 209,538 110,539 96,542 80,549Z M581,494 581,537 554,538 555,546 581,547 581,635 584,641 591,648 609,656 631,660 658,660 658,652 635,652 617,647 608,638 606,632 606,547 658,546 658,538 607,538 606,494Z M534,494 487,495 462,502 451,509 447,514 444,521 444,537 431,538 431,546 444,547 444,704 469,704 469,547 508,546 508,538 470,538 470,520 473,514 483,506 500,502 534,502Z"/>
   </svg>
@@ -63,6 +91,6 @@
       </div>
     </div>
   </main>
-  <script src="/js/delight.js?v=2" defer></script>
+  <script src="/js/delight.js?v=4" defer></script>
 </body>
 </html>

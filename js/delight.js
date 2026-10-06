@@ -56,12 +56,21 @@
     }));
   }
 
-  /* ---------- Hero logo: a single shine on arrival, again on hover ---------- */
+  /* ---------- Hero logo: on hover, light traces the ribbon's edges once ---------- */
   const logoWrap = $(".hero__logo-wrap");
-  if (logoWrap && !reduceMotion) {
-    const shine = () => { logoWrap.classList.remove("shine"); void logoWrap.offsetWidth; logoWrap.classList.add("shine"); };
-    setTimeout(shine, 1100);
-    logoWrap.addEventListener("mouseenter", shine);
+  if (logoWrap) {
+    if (reduceMotion) {
+      // show the finished mark straight away
+      $(".mark__fill", logoWrap)?.removeAttribute("mask");
+    } else {
+      let busy = false;
+      logoWrap.addEventListener("mouseenter", () => {
+        if (busy) return;
+        busy = true;
+        logoWrap.classList.remove("trace"); void logoWrap.offsetWidth; logoWrap.classList.add("trace");
+        setTimeout(() => { busy = false; }, 1400);
+      });
+    }
   }
 
   /* ---------- Rotating word: underline draws with each new word ---------- */

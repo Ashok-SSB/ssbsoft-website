@@ -9,6 +9,7 @@ html, body { background: #fff !important; color: #111 !important; font-size: 11p
 .hero h1, .section--dark h2, .section--dark h3, .stat__value, .cta h2, .footer, .footer a { color: #111 !important; }
 .hero__sub, .section--dark p, .stat__label, .cta p, .hero__chips, .hero__chips strong { color: #333 !important; }
 .mark__word { fill: #3a3632 !important; }
+.mark__lines { display: none !important; }
 .rotator__word { color: #b91c1c !important; -webkit-text-fill-color: #b91c1c; background: none !important; }
 .case__metric { color: #b91c1c !important; -webkit-text-fill-color: #b91c1c; background: none !important; }
 .hero__actions, .cta .hero__actions { display: none !important; }
