@@ -23,4 +23,3 @@ details > .faq__body { display: block !important; }
 .contact__mail a { color: #b91c1c !important; }
 .breeze .w { opacity: 1 !important; transform: none !important; filter: none !important; }
 .codefield { display: none !important; }
-.flip { min-height: 0 !important; } .flip__inner, .flip__face { position: static !important; transform: none !important; box-shadow: none !important; } .flip__back { background: none !important; color: #111 !important; } .flip__a { color: #111 !important; } .flip__hint { display: none !important; }

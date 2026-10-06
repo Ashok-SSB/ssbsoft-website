@@ -1091,61 +1091,22 @@ html:not(.js) .slotcard__ok svg { stroke-dashoffset: 0; }
 @keyframes wakeShine { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
 
 /* ==========================================================
-   FAQ — flip cards
+   FAQ — polished list
    ========================================================== */
-.faq__lede { margin: -.5rem 0 1.4rem; font-size: .9rem; color: var(--muted); }
-.flips { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.flip {
-  --tx: 0deg; --ty: 0deg;
-  position: relative; display: block; width: 100%; min-height: 196px; padding: 0; border: 0; background: none;
-  font: inherit; color: inherit; text-align: left; cursor: pointer; perspective: 900px;
-}
-.flip__inner {
-  position: absolute; inset: 0; transform-style: preserve-3d;
-  transform: rotateX(var(--ty)) rotateY(var(--tx));
-  transition: transform .8s cubic-bezier(.34, 1.3, .5, 1);
-}
-.flip:hover .flip__inner { transform: translateY(-3px) rotateX(var(--ty)) rotateY(var(--tx)); }
-.flip.is-flipped .flip__inner { transform: rotateX(var(--ty)) rotateY(calc(180deg + var(--tx))); }
-.flip__face {
-  position: absolute; inset: 0; display: flex; flex-direction: column; padding: 20px 20px 16px; border-radius: 16px;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden;
-}
-.flip__front { background: var(--surface); box-shadow: var(--shadow-sm), inset 0 0 0 1px var(--line); transition: box-shadow .35s; }
-.flip:hover .flip__front { box-shadow: var(--shadow), inset 0 0 0 1px rgba(220, 38, 38, .3); }
-.flip__back { transform: rotateY(180deg); background: var(--grad); color: #fff; box-shadow: 0 20px 40px -18px rgba(127, 29, 29, .7); }
-.flip__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-.flip__num { font: 700 .78rem/1 var(--font-head); color: var(--faint); letter-spacing: .06em; }
-.flip__icon { width: 30px; height: 30px; padding: 6px; border-radius: 10px; background: rgba(220, 38, 38, .08); fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform .5s var(--spring); }
-.flip:hover .flip__icon { transform: rotate(-8deg) scale(1.08); }
-.flip__q { font: 600 1.02rem/1.35 var(--font-head); color: var(--ink-2); letter-spacing: -.01em; }
-.flip__a { font-size: .92rem; line-height: 1.55; color: rgba(255, 255, 255, .95); }
-.flip__hint {
-  display: inline-flex; align-items: center; gap: 6px; margin-top: auto; align-self: flex-end;
-  font: 600 .72rem/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: var(--faint);
-  opacity: 0; transform: translateX(-4px); transition: opacity .3s, transform .4s var(--spring);
-}
-.flip__back .flip__hint { color: rgba(255, 255, 255, .75); opacity: 1; transform: none; }
-.flip:hover .flip__front .flip__hint, .flip:focus-visible .flip__front .flip__hint { opacity: 1; transform: none; color: var(--accent); }
-.flip__hint svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .5s var(--spring); }
-.flip:hover .flip__hint svg { transform: rotate(180deg); }
-/* a sheen sweeps across while the card turns */
-.flip__face::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
-  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%) 150% 0 / 250% 100% no-repeat;
-}
-.flip.is-turning .flip__face::after { animation: flipSheen .8s var(--ease); }
-@keyframes flipSheen { 0% { opacity: 1; background-position: 150% 0; } 100% { opacity: 0; background-position: -50% 0; } }
-.flip.is-turning .flip__inner { animation: flipPop .8s var(--ease); }
-@keyframes flipPop { 40% { scale: 1.04; } }
-.flip:focus-visible { outline: none; }
-.flip:focus-visible .flip__face { outline: 2px solid var(--accent); outline-offset: 3px; }
-/* without JavaScript, show answers under the questions */
-html:not(.js) .flip { min-height: 0; cursor: default; }
-html:not(.js) .flip__inner, html:not(.js) .flip__face { position: static; transform: none; }
-html:not(.js) .flip__back { margin-top: 8px; }
-.faq { container-type: inline-size; }
-@container (max-width: 420px) { .flips { grid-template-columns: 1fr; } .flip { min-height: 150px; } }
+.faq details { position: relative; margin: 0 -14px; padding: 0 14px; border-bottom: 1px solid var(--line); border-radius: 14px; transition: background .4s var(--ease), border-color .4s; }
+.faq details::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px; border-radius: 3px; background: var(--grad); transform: scaleY(0); transform-origin: top; transition: transform .45s var(--ease); }
+.faq details[open] { background: rgba(220, 38, 38, .05); border-bottom-color: transparent; }
+.faq details[open]::before { transform: scaleY(1); }
+.faq summary { display: flex; align-items: baseline; gap: 14px; }
+.faq__num { flex: none; font: 700 .78rem/1 var(--font-head); color: var(--faint); letter-spacing: .06em; transition: color .3s; }
+.faq details[open] .faq__num, .faq summary:hover .faq__num { color: var(--accent); }
+.faq__q { transition: color .3s, transform .35s var(--ease); }
+.faq summary:hover .faq__q { color: var(--accent); transform: translateX(3px); }
+.faq summary::after { transition: transform .45s var(--spring), background-color .3s; }
+.faq details[open] summary::after { transform: rotate(135deg); background-color: rgba(220, 38, 38, .1); }
+.faq__body p { padding-left: calc(.78rem + 24px); }
+.js .faq details[open] .faq__s { display: inline-block; animation: faqLine .55s var(--ease) both; animation-delay: calc(.08s + var(--s) * .12s); }
+@keyframes faqLine { from { opacity: 0; transform: translateY(8px); } }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
