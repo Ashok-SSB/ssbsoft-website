@@ -93,7 +93,7 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
   overflow: hidden; isolation: isolate;
 }
 .btn svg { transition: transform .3s var(--ease); }
-.btn:hover > svg:not(.btn__check) { animation: arrowLoop .55s var(--ease); }
+.btn:hover > .btn__arrow { animation: arrowLoop .55s var(--ease); }
 @keyframes arrowLoop { 45% { transform: translateX(12px); opacity: 0; } 46% { transform: translateX(-10px); opacity: 0; } 100% { transform: none; opacity: 1; } }
 .btn--sm { padding: .6rem 1.1rem; font-size: .88rem; }
 .btn--lg { padding: 1rem 1.8rem; font-size: 1rem; }
@@ -926,6 +926,73 @@ img { transition: opacity .6s var(--ease); }
 .portrait:hover .about__frame, .about:has(.note__sign:hover) .about__frame { transform: scale(1.025); box-shadow: 0 30px 60px -24px rgba(220, 38, 38, .45); }
 .portrait:hover .portrait__line rect, .about:has(.note__sign:hover) .portrait__line rect { stroke-dashoffset: 0; transition: stroke-dashoffset 2s cubic-bezier(.65, 0, .25, 1); }
 .about__badge { z-index: 3; }
+
+/* ==========================================================
+   Buttons with personality — one small gesture each
+   ========================================================== */
+.bi { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+
+/* Label roll: the words lift away and a friendlier line rolls in */
+.roll { display: inline-grid; overflow: hidden; line-height: 1.25; padding-block: .1em; margin-block: -.1em; }
+.roll > span, .roll::after { grid-area: 1 / 1; transition: transform .55s cubic-bezier(.7, 0, .2, 1), opacity .4s; }
+.roll::after { content: attr(data-alt); content: attr(data-alt) / ""; text-align: center; transform: translateY(105%); opacity: 0; }
+.btn:hover .roll > span { transform: translateY(-105%); opacity: 0; }
+.btn:hover .roll::after { transform: none; opacity: 1; }
+
+/* Book a call: the calendar flips a page */
+.btn__cal { width: 16px; height: 16px; }
+.btn__cal-top { transform-box: fill-box; transform-origin: 50% 100%; }
+.btn--cal:hover .btn__cal-top { animation: pageFlip .6s cubic-bezier(.5, 0, .2, 1); }
+@keyframes pageFlip { 50% { transform: scaleY(-1); } }
+
+/* See our work: a fine line traces the edge, an arrow slips out and back */
+.btn--work { gap: .55rem; }
+.btn__trace { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.btn__trace rect { width: calc(100% - 2px); height: calc(100% - 2px); fill: none; stroke: #fca5a5; stroke-width: 1.5; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .5s var(--ease); }
+.btn--work:hover .btn__trace rect { stroke-dashoffset: 0; transition: stroke-dashoffset 1s cubic-bezier(.65, 0, .25, 1); }
+.btn--work:hover { border-color: transparent; }
+.btn__out { width: 16px; height: 16px; }
+.btn--work:hover .btn__out { animation: slipOut .6s var(--ease); }
+@keyframes slipOut { 45% { transform: translate(9px, -9px); opacity: 0; } 46% { transform: translate(-9px, 9px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+
+/* Plan my MVP: lift-off */
+.btn__rocket { transition: transform .5s var(--spring); }
+.btn__flame { fill: #fde68a; stroke: none; opacity: 0; transform-box: fill-box; transform-origin: 100% 0; transition: opacity .2s; }
+.btn--rocket:hover .btn__rocket { transform: translate(3px, -3px); animation: hover-shake .5s ease-in-out .35s 2; }
+.btn--rocket:hover .btn__flame { opacity: 1; animation: flame .18s linear infinite alternate; }
+@keyframes hover-shake { 50% { translate: .6px -.6px; } }
+@keyframes flame { to { transform: scale(1.35); } }
+
+/* Meet our engineers: three teammates pop in */
+.btn__team { display: inline-flex; margin-left: 2px; }
+.btn__team i { width: 12px; height: 12px; border-radius: 50%; background: #fecaca; border: 2px solid #b91c1c; margin-left: -4px; transform: scale(.82); transition: transform .45s var(--spring), background .3s; }
+.btn__team i:nth-child(2) { background: #fca5a5; }
+.btn__team i:nth-child(3) { background: #fff; }
+.btn--team:hover .btn__team i { transform: scale(1.12) translateY(-2px); }
+.btn--team:hover .btn__team i:nth-child(2) { transition-delay: .07s; }
+.btn--team:hover .btn__team i:nth-child(3) { transition-delay: .14s; }
+
+/* Plan a modernization: old turns into new */
+.btn__cycle { transition: transform .7s var(--spring); }
+.btn--cycle:hover .btn__cycle { transform: rotate(180deg); }
+
+/* Send message: the paper plane hops forward */
+.btn__plane { width: 17px; height: 17px; transition: transform .5s var(--spring); }
+.btn:hover .btn__plane { animation: hop .7s var(--ease); }
+@keyframes hop { 40% { transform: translate(8px, -8px) rotate(8deg); opacity: 0; } 41% { transform: translate(-8px, 8px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.btn.is-done .btn__plane, .btn.is-loading .btn__plane { display: none; }
+
+/* Testimonial arrows: fill and nudge in their direction */
+.slider__btn svg { transition: transform .35s var(--spring), stroke .25s; }
+.slider__btn:hover { background: var(--red); border-color: var(--red); }
+.slider__btn:hover svg { stroke: #fff; }
+.slider__btn[data-dir="1"]:hover svg { transform: translateX(3px); }
+.slider__btn[data-dir="-1"]:hover svg { transform: translateX(-3px); }
+
+/* Theme switch: rays turn, moon rocks */
+.theme:hover .theme__sun { transform: rotate(45deg); }
+:root[data-theme="dark"] .theme:hover .theme__moon { transform: rotate(-18deg); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme:hover .theme__moon { transform: rotate(-18deg); } }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

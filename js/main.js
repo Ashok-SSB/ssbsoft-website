@@ -396,7 +396,7 @@
         btn.classList.add("is-done");
         $(".btn__label", btn).textContent = msg;
         window.ssbDelight?.burst(btn);
-        setTimeout(() => { btn.classList.remove("is-done"); $(".btn__label", btn).textContent = "Send Message"; }, 4000);
+        setTimeout(() => { btn.classList.remove("is-done"); $(".btn__label", btn).textContent = "Send message"; }, 4000);
       };
       if (!endpoint) {
         const body = `${data.message}\n\nEmail: ${data.email}\nPhone: ${data.phone || "-"}`;

@@ -29,7 +29,7 @@
   </script>
   <link rel="preload" href="assets/fonts/jakarta-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=24" />
+  <link rel="stylesheet" href="css/style.css?v=26" />
   <link rel="stylesheet" href="css/print.css?v=1" media="print" />
 </head>
 <body>
@@ -55,7 +55,7 @@
         <svg class="theme__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
         <svg class="theme__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
       </button>
-      <a href="#contact" class="btn btn--primary btn--sm nav__cta">Book a call</a>
+      <a href="#contact" class="btn btn--primary btn--sm nav__cta btn--cal"><svg class="bi btn__cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2.5"/><path class="btn__cal-top" d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg><span class="roll" data-alt="Pick a time"><span>Book a call</span></span></a>
       <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
     <div class="nav__mobile">
@@ -134,8 +134,8 @@
         </h1>
         <p class="hero__sub reveal" style="--d:.5s">Our clients have scaled past $1M&nbsp;in revenue, raised millions in funding and been acquired. We build the products and the teams that get them there.</p>
         <div class="hero__actions reveal" style="--d:.65s">
-          <a href="#contact" class="btn btn--primary btn--lg">Book a 30&#8209;min call <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="#case-studies" class="btn btn--ghost btn--lg">See our work</a>
+          <a href="#contact" class="btn btn--primary btn--lg"><span class="roll" data-alt="Pick a time slot"><span>Book a 30&#8209;min call</span></span> <svg class="bi btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#case-studies" class="btn btn--ghost btn--lg btn--work"><svg class="btn__trace" aria-hidden="true"><rect x="1" y="1" rx="25" ry="25" pathLength="1"/></svg>See our work <svg class="bi btn__out" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
         <ul class="hero__chips reveal" style="--d:.8s">
           <li><strong>72&nbsp;hrs</strong> to hire engineers</li>
@@ -247,7 +247,7 @@
               <div>
                 <h3>Launch an MVP</h3>
                 <p>We design MVPs built for acquisition and retention. Your product gets to market in weeks, giving you the traction to validate, raise and grow.</p>
-                <a href="#contact" class="btn btn--primary">Plan my MVP</a>
+                <a href="#contact" class="btn btn--primary btn--rocket">Plan my MVP <svg class="bi btn__rocket" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 4.5c3-1.6 5.6-1.5 6-1 .5.4.6 3-1 6l-5.2 5.2-4-4z"/><path d="M9.3 10.7 6 10.2l-2 2 3.6 1.2M13.3 14.7l.5 3.3-2 2-1.2-3.6"/><circle cx="15.6" cy="8.4" r="1.3"/><path class="btn__flame" d="M6.7 17.3c-1.2.4-2.2 1.2-2.7 2.7 1.5-.5 2.3-1.5 2.7-2.7z"/></svg></a>
               </div>
               <ul class="checks">
                 <li>Market-ready in&nbsp;3&nbsp;weeks</li>
@@ -260,7 +260,7 @@
               <div>
                 <h3>Staff Augmentation</h3>
                 <p>Immediate access to experienced, vetted developers who integrate into your team within days. They stay long term, so product knowledge compounds instead of resetting.</p>
-                <a href="#contact" class="btn btn--primary">Meet our engineers</a>
+                <a href="#contact" class="btn btn--primary btn--team">Meet our engineers <span class="btn__team" aria-hidden="true"><i></i><i></i><i></i></span></a>
               </div>
               <ul class="checks">
                 <li>Hire developers in&nbsp;72&nbsp;hours</li>
@@ -274,7 +274,7 @@
               <div>
                 <h3>Legacy Modernization</h3>
                 <p>We transform outdated applications into scalable, cloud-ready platforms using AI-driven approaches — from re-architecture to intelligent automation and UX redesign — without disrupting operations.</p>
-                <a href="#contact" class="btn btn--primary">Plan a modernization</a>
+                <a href="#contact" class="btn btn--primary btn--cycle">Plan a modernization <svg class="bi btn__cycle" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8M4 4v4h4M4 13a8 8 0 0 0 14.3 4.9L20 16M20 20v-4h-4"/></svg></a>
               </div>
               <ul class="checks">
                 <li>Re-architected for scalability and security</li>
@@ -457,8 +457,8 @@
         <h2>Ready to build and scale?</h2>
         <p>Takes only 30&nbsp;minutes. No commitment required.</p>
         <div class="hero__actions">
-          <a href="#contact" class="btn btn--light btn--lg">Book a 30&#8209;min call</a>
-          <a href="#case-studies" class="btn btn--outline-light btn--lg">See our work</a>
+          <a href="#contact" class="btn btn--light btn--lg"><span class="roll" data-alt="Let’s talk"><span>Book a 30&#8209;min call</span></span> <svg class="bi btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#case-studies" class="btn btn--outline-light btn--lg btn--work"><svg class="btn__trace" aria-hidden="true"><rect x="1" y="1" rx="25" ry="25" pathLength="1"/></svg>See our work <svg class="bi btn__out" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
         </div>
       </div>
     </section>
@@ -486,6 +486,7 @@
             </div>
             <button type="submit" class="btn btn--primary btn--lg btn--block">
               <span class="btn__label">Send message</span>
+              <svg class="bi btn__plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10.5 13.5M21 3l-6.5 18-4-7.5L3 9.5z"/></svg>
               <svg class="btn__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
               <span class="btn__spinner" aria-hidden="true"></span>
             </button>
@@ -517,8 +518,7 @@
     </section>
   </main>
 
-  <a href="#contact" class="dock btn btn--primary" aria-hidden="true" tabindex="-1">Book a 30&#8209;min call
-    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <a href="#contact" class="dock btn btn--primary" aria-hidden="true" tabindex="-1"><span class="roll" data-alt="Pick a time slot"><span>Book a 30&#8209;min call</span></span> <svg class="bi btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 
   <footer class="footer">
     <div class="container footer__inner">
@@ -543,7 +543,7 @@
 
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="js/flow.js?v=3" defer></script>
-  <script src="js/main.js?v=8" defer></script>
+  <script src="js/main.js?v=9" defer></script>
   <script src="js/delight.js?v=4" defer></script>
   <script src="js/codefield.js?v=1" defer></script>
 </body>
