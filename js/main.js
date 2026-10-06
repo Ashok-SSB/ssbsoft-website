@@ -166,14 +166,33 @@
   };
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
 
-  /* ---------- Nav: active link indicator ---------- */
+  /* ---------- Nav: hover pill glides between links; a dot marks the current section ---------- */
   const links = $$(".nav__links a");
   const indicator = $(".nav__indicator");
-  const moveIndicator = (a) => {
-    if (!a) { indicator.style.opacity = 0; return; }
-    indicator.style.opacity = 1;
+  const dot = document.createElement("span");
+  dot.className = "nav__dot";
+  dot.setAttribute("aria-hidden", "true");
+  indicator.after(dot);
+  let pillShown = false;
+  const showPill = (a) => {
+    if (!pillShown) {
+      // appear in place rather than sliding in from the last position
+      indicator.style.transition = "none";
+      indicator.style.width = a.offsetWidth + "px";
+      indicator.style.transform = `translateX(${a.offsetLeft}px)`;
+      void indicator.offsetWidth;
+      indicator.style.transition = "";
+    }
     indicator.style.width = a.offsetWidth + "px";
     indicator.style.transform = `translateX(${a.offsetLeft}px)`;
+    indicator.style.opacity = 1;
+    pillShown = true;
+  };
+  const hidePill = () => { indicator.style.opacity = 0; pillShown = false; };
+  const placeDot = (a) => {
+    if (!a) { dot.style.opacity = 0; return; }
+    dot.style.opacity = 1;
+    dot.style.transform = `translateX(${a.offsetLeft + a.offsetWidth / 2 - 2}px)`;
   };
   let current = null;
   const sectionIO = new IntersectionObserver((entries) => {
@@ -181,14 +200,13 @@
       if (!e.isIntersecting) return;
       current = links.find((a) => a.getAttribute("href") === "#" + e.target.id) || null;
       links.forEach((a) => a.classList.toggle("is-active", a === current));
-      moveIndicator(current);
+      placeDot(current);
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   $$("main section[id]").forEach((s) => sectionIO.observe(s));
-  links.forEach((a) => {
-    a.addEventListener("mouseenter", () => moveIndicator(a));
-    a.addEventListener("mouseleave", () => moveIndicator(current));
-  });
+  links.forEach((a) => a.addEventListener("mouseenter", () => showPill(a)));
+  $(".nav__links").addEventListener("mouseleave", hidePill);
+  addEventListener("resize", () => placeDot(current));
 
   /* ---------- Mobile menu ---------- */
   const toggle = $(".nav__toggle");

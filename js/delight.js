@@ -145,16 +145,6 @@
     });
   });
 
-  /* ---------- Top menu: letters roll on hover ---------- */
-  const navLinks = $$(".nav__links a");
-  navLinks.forEach((a) => {
-    const text = a.textContent.trim();
-    a.setAttribute("aria-label", text);
-    const letters = (cls) => [...text].map((ch, i) =>
-      `<span class="nl__ch" style="--i:${i}">${ch === " " ? "&nbsp;" : ch}</span>`).join("");
-    a.innerHTML = `<span class="nl" aria-hidden="true"><span class="nl__a">${letters()}</span><span class="nl__b">${letters()}</span></span>`;
-  });
-
   /* ---------- "Ready to build": a calendar card that picks a slot ---------- */
   const slotcard = $(".slotcard");
   if (slotcard) {
