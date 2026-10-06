@@ -72,11 +72,14 @@
   }
 
   /* ---------- Images arrive softly instead of popping in ---------- */
-  $$("img[loading='lazy']").forEach((img) => {
-    const done = () => img.classList.add("is-loaded");
-    if (img.complete && img.naturalWidth) done();
-    else { img.addEventListener("load", done, { once: true }); img.addEventListener("error", done, { once: true }); }
-  });
+  // One listener for every image, including ones added later (e.g. the logo strip's
+  // duplicated set), so nothing can be left invisible.
+  const markLoaded = (e) => { if (e.target.tagName === "IMG") e.target.classList.add("is-loaded"); };
+  document.addEventListener("load", markLoaded, true);
+  document.addEventListener("error", markLoaded, true);
+  const sweep = () => $$("img[loading='lazy']").forEach((img) => { if (img.complete) img.classList.add("is-loaded"); });
+  sweep();
+  document.addEventListener("DOMContentLoaded", sweep);
 
   /* ---------- Text that flows like a breeze ----------
      Headings: words drift up and come into focus one after another.
