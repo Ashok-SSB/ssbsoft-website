@@ -877,7 +877,7 @@ img { transition: opacity .6s var(--ease); }
 /* ==========================================================
    Testimonials — a moment of recognition on hover
    ========================================================== */
-.avatar { position: relative; display: inline-grid; place-items: center; flex: none; transition: transform .8s var(--spring); }
+.avatar { position: relative; z-index: 2; display: inline-grid; place-items: center; flex: none; transition: transform .8s var(--spring); }
 .avatar img { position: relative; z-index: 1; transition: box-shadow .8s var(--ease); }
 .avatar__ring { position: absolute; inset: -7px; width: calc(100% + 14px); height: calc(100% + 14px); overflow: visible; transform: rotate(-90deg); pointer-events: none; }
 .avatar__ring circle {
@@ -899,6 +899,39 @@ img { transition: opacity .6s var(--ease); }
 .slide figcaption:hover strong { color: var(--accent); }
 .slide figcaption:hover strong::after { transform: scaleX(1); transition-delay: .35s; }
 .slide figcaption:hover > span:not(.avatar) { transform: translateX(4px); }
+
+/* sparkles: pop out once the ring is drawn, then twinkle while hovered */
+.sparks { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.spark { position: absolute; display: block; opacity: 0; transform: scale(0) rotate(-60deg); }
+.spark svg { display: block; width: 100%; height: 100%; fill: #f59e0b; filter: drop-shadow(0 0 2px rgba(251, 191, 36, 1)) drop-shadow(0 0 7px rgba(245, 158, 11, .75)); }
+.spark--1 { width: 20px; height: 20px; top: -13px; right: -13px; }
+.spark--2 { width: 11px; height: 11px; bottom: -12px; left: -12px; }
+.spark--3 { width: 8px; height: 8px; top: -18px; left: 6px; }
+.slide figcaption:hover .spark, .portrait:hover .spark, .about:has(.note__sign:hover) .portrait .spark { animation: sparkIn .55s var(--spring) forwards, twinkle 1.8s ease-in-out infinite; }
+.slide figcaption:hover .spark--1 { animation-delay: 1.05s, 1.6s; }
+.slide figcaption:hover .spark--2 { animation-delay: 1.25s, 1.9s; }
+.slide figcaption:hover .spark--3 { animation-delay: 1.4s, 2.2s; }
+@keyframes sparkIn { to { opacity: 1; transform: scale(1) rotate(0deg); } }
+@keyframes twinkle { 0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); } 50% { opacity: .7; transform: scale(.78) rotate(25deg); } }
+
+/* founder portrait: a line traces the frame, the photo lifts, stars appear */
+.portrait { position: relative; max-width: 440px; }
+.portrait__line { position: absolute; inset: -10px; width: calc(100% + 20px); height: calc(100% + 20px); overflow: visible; pointer-events: none; }
+.portrait__line rect {
+  width: calc(100% - 2px); height: calc(100% - 2px);
+  fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .7s var(--ease);
+}
+.portrait .about__frame { transition: transform .9s var(--spring), box-shadow .9s var(--ease); }
+.portrait:hover .about__frame, .about:has(.note__sign:hover) .about__frame { transform: scale(1.025); box-shadow: 0 30px 60px -24px rgba(220, 38, 38, .45); }
+.portrait:hover .portrait__line rect, .about:has(.note__sign:hover) .portrait__line rect { stroke-dashoffset: 0; transition: stroke-dashoffset 2s cubic-bezier(.65, 0, .25, 1); }
+.portrait .spark--1 { width: 30px; height: 30px; top: -24px; right: -24px; left: auto; bottom: auto; }
+.portrait .spark--2 { width: 16px; height: 16px; bottom: -22px; left: -20px; top: auto; right: auto; }
+.portrait .spark--3 { width: 11px; height: 11px; top: -26px; right: 34px; left: auto; bottom: auto; }
+.portrait:hover .spark--1, .about:has(.note__sign:hover) .portrait .spark--1 { animation-delay: 1.5s, 2.05s; }
+.portrait:hover .spark--2, .about:has(.note__sign:hover) .portrait .spark--2 { animation-delay: 1.7s, 2.3s; }
+.portrait:hover .spark--3, .about:has(.note__sign:hover) .portrait .spark--3 { animation-delay: 1.85s, 2.6s; }
+.about__badge { z-index: 3; }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
