@@ -1,0 +1,22 @@
+/* SSB Soft — print: a clean one-page company profile */
+@page { margin: 16mm 14mm; }
+html, body { background: #fff !important; color: #111 !important; font-size: 11pt; }
+.nav, .skip, .scroll-progress, .hero__canvas, .hero__glow, .hero__scroll, .dock, .theme,
+.slider__controls, .slider__quote, .services__tabs, .form, .copy, .iso-grid, .footer__top, .logos { display: none !important; }
+*, *::before, *::after { animation: none !important; transition: none !important; box-shadow: none !important; text-shadow: none !important; }
+.reveal, .js .reveal, .slide, .js .slide, .js .hero__title .line > *, .js .mark .f, .js .mark__word { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+.hero, .section, .section--dark, .section--tint, .cta, .footer { background: none !important; color: #111 !important; min-height: 0 !important; padding: 10mm 0 !important; clip-path: none !important; margin: 0 !important; }
+.hero h1, .section--dark h2, .section--dark h3, .stat__value, .cta h2, .footer, .footer a { color: #111 !important; }
+.hero__sub, .section--dark p, .stat__label, .cta p, .hero__chips, .hero__chips strong { color: #333 !important; }
+.mark__word { fill: #3a3632 !important; }
+.rotator__word { color: #b91c1c !important; -webkit-text-fill-color: #b91c1c; background: none !important; }
+.case__metric { color: #b91c1c !important; -webkit-text-fill-color: #b91c1c; background: none !important; }
+.hero__actions, .cta .hero__actions { display: none !important; }
+.services__panel, .services__panel[hidden] { display: block !important; margin-bottom: 8mm; }
+.slider__viewport { display: block !important; }
+.slide { margin-bottom: 6mm !important; }
+.case, .feature, .step, .slide, .services__panel, details { break-inside: avoid; }
+.feature, .case, .services__panels, .faq { border: 1px solid #ddd !important; background: #fff !important; }
+details > .faq__body { display: block !important; }
+.cases, .features { grid-template-columns: repeat(2, 1fr) !important; }
+.contact__mail a { color: #b91c1c !important; }

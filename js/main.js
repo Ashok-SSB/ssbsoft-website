@@ -45,6 +45,7 @@
     const hero = heroCanvas.parentElement;
     const target = { x: .7, y: .5 }, pointer = { x: .7, y: .5 };
     let W, H, dpr, t = 0, running = true;
+    const born = performance.now();
     const LINES = 34, STEP = 6;
 
     const size = () => {
@@ -66,7 +67,10 @@
       pointer.y += (target.y - pointer.y) * .04;
       ctx.clearRect(0, 0, W, H);
 
-      const spread = H * .62, top = H * .5 - spread / 2 + H * .12;
+      // on arrival the lines start folded tight around the mark, then unfold
+      const u = reduceMotion ? 1 : Math.min((performance.now() - born) / 2200, 1);
+      const unfold = .06 + .94 * (1 - Math.pow(1 - u, 4));
+      const spread = H * .62 * unfold, top = H * .5 - spread / 2 + H * .12 * unfold - H * .2 * (1 - unfold);
       const px = pointer.x * W, py = pointer.y * H;
       const amp = Math.max(28, H * .07);
 
@@ -128,6 +132,7 @@
       const p = clamp((now - start) / dur, 0, 1), e = 1 - Math.pow(1 - p, 4);
       el.textContent = pre + formatNum(Math.round(target * e)) + suf;
       if (p < 1) requestAnimationFrame(tick);
+      else el.classList.add("settled");
     };
     requestAnimationFrame(tick);
   };
@@ -230,7 +235,7 @@
       activate(tabs[(i + d + tabs.length) % tabs.length], true);
     });
   });
-  placeBar();
+  activate(tabs.find((t) => t.classList.contains("is-active")) || tabs[0]);
   addEventListener("resize", placeBar);
   document.fonts?.ready.then(placeBar);
 
@@ -379,9 +384,18 @@
       }
       const data = Object.fromEntries(new FormData(form));
       const endpoint = form.dataset.endpoint;
+      const celebrate = (msg) => {
+        btn.classList.add("is-done");
+        $(".btn__label", btn).textContent = msg;
+        window.ssbDelight?.burst(btn);
+        setTimeout(() => { btn.classList.remove("is-done"); $(".btn__label", btn).textContent = "Send Message"; }, 4000);
+      };
       if (!endpoint) {
         const body = `${data.message}\n\nEmail: ${data.email}\nPhone: ${data.phone || "-"}`;
-        location.href = `mailto:contact@ssbsoft.com?subject=${encodeURIComponent("Project enquiry")}&body=${encodeURIComponent(body)}`;
+        celebrate("Opening your email…");
+        setTimeout(() => {
+          location.href = `mailto:contact@ssbsoft.com?subject=${encodeURIComponent("Project enquiry")}&body=${encodeURIComponent(body)}`;
+        }, 650);
         return;
       }
       btn.classList.add("is-loading"); btn.disabled = true;
@@ -389,7 +403,9 @@
         const res = await fetch(endpoint, { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data) });
         if (!res.ok) throw new Error(res.status);
         form.reset();
-        status.textContent = "Thanks! We’ll get back to you within one business day.";
+        $$(".field", form).forEach((f) => f.classList.remove("is-valid"));
+        celebrate("Message sent");
+        status.textContent = "Got it — thank you. Someone from our team will get back to you shortly.";
         status.classList.add("ok");
       } catch {
         status.textContent = "Something went wrong. Please email contact@ssbsoft.com.";
@@ -400,4 +416,48 @@
     });
     $$(".field input, .field textarea", form).forEach((i) => i.addEventListener("input", () => i.parentElement.classList.remove("is-invalid")));
   }
+
+  /* ---------- Theme: light / dark, remembered, with a circular reveal ---------- */
+  const themeBtn = $(".theme");
+  if (themeBtn) {
+    const root = document.documentElement;
+    const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    const label = () => themeBtn.setAttribute("aria-label", isDark() ? "Switch to light theme" : "Switch to dark theme");
+    label();
+    themeBtn.addEventListener("click", (e) => {
+      const next = isDark() ? "light" : "dark";
+      const apply = () => { root.dataset.theme = next; try { localStorage.setItem("theme", next); } catch {} label(); };
+      if (!document.startViewTransition || reduceMotion) { apply(); return; }
+      const r = Math.hypot(Math.max(e.clientX, innerWidth - e.clientX), Math.max(e.clientY, innerHeight - e.clientY));
+      document.startViewTransition(apply).ready.then(() => {
+        root.animate({ clipPath: [`circle(0 at ${e.clientX}px ${e.clientY}px)`, `circle(${r}px at ${e.clientX}px ${e.clientY}px)`] },
+          { duration: 650, easing: "cubic-bezier(.6,0,.2,1)", pseudoElement: "::view-transition-new(root)" });
+      });
+    });
+  }
+
+  /* ---------- Mobile: booking button appears after the hero, steps aside at the form ---------- */
+  const dock = $(".dock");
+  if (dock) {
+    const heroEl = $(".hero"), contactEl = $("#contact");
+    let pastHero = false, atContact = false;
+    const set = () => {
+      const on = pastHero && !atContact;
+      dock.classList.toggle("is-shown", on);
+      dock.setAttribute("aria-hidden", !on);
+      dock.tabIndex = on ? 0 : -1;
+    };
+    new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; set(); }).observe(heroEl);
+    new IntersectionObserver(([e]) => { atContact = e.isIntersecting; set(); }, { threshold: .05 }).observe(contactEl);
+  }
+
+  /* ---------- Print: show everything ---------- */
+  addEventListener("beforeprint", () => {
+    $$(".faq details").forEach((d) => { d.dataset.wasOpen = d.open; d.open = true; });
+    $$(".services__panel").forEach((p) => { p.hidden = false; });
+  });
+  addEventListener("afterprint", () => {
+    $$(".faq details").forEach((d) => { d.open = d.dataset.wasOpen === "true"; });
+    activate(tabs.find((t) => t.classList.contains("is-active")) || tabs[0]);
+  });
 })();

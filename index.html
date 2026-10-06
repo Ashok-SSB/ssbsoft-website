@@ -21,21 +21,27 @@
   <meta name="twitter:title" content="SSB Soft — Launch and scale with world-class engineers" />
   <meta name="twitter:description" content="MVPs in weeks, vetted engineers in 72 hours and 98% retention." />
   <meta name="twitter:image" content="https://ssbsoft.com/assets/img/og-image.jpg" />
-  <link rel="preload" as="image" href="assets/img/ssb-logo-dark.webp" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=5" />
+  <meta name="color-scheme" content="light dark" />
+  <script>
+    /* before first paint: mark JS as available and apply a saved theme, so nothing flashes */
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+  <link rel="preload" href="assets/fonts/jakarta-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="stylesheet" href="css/print.css?v=1" media="print" />
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <!-- NAV -->
   <header class="nav at-hero" id="nav">
     <div class="container nav__inner">
       <a href="#top" class="nav__brand" aria-label="SSB Soft home">
-        <img class="nav__logo nav__logo--light" src="assets/img/ssb-logo-dark-nav.webp" alt="SSB Soft" />
-        <img class="nav__logo nav__logo--color" src="assets/img/ssb-logo-nav.webp" alt="" aria-hidden="true" />
+        <img width="133" height="128" class="nav__logo nav__logo--light" src="assets/img/ssb-logo-dark-nav.webp" alt="SSB Soft" />
+        <img width="133" height="128" class="nav__logo nav__logo--color" src="assets/img/ssb-logo-nav.webp" alt="" aria-hidden="true" />
       </a>
       <nav class="nav__links" aria-label="Primary">
         <a href="#services">Services</a>
@@ -45,7 +51,11 @@
         <a href="#about">About</a>
         <span class="nav__indicator" aria-hidden="true"></span>
       </nav>
-      <a href="#contact" class="btn btn--primary btn--sm nav__cta">Talk to Us</a>
+      <button class="theme" type="button" aria-label="Switch to dark theme">
+        <svg class="theme__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+        <svg class="theme__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="#contact" class="btn btn--primary btn--sm nav__cta">Book a call</a>
       <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
     </div>
     <div class="nav__mobile">
@@ -54,31 +64,54 @@
       <a href="#process">Process</a>
       <a href="#why-us">Why Us</a>
       <a href="#about">About</a>
-      <a href="#contact" class="btn btn--primary">Talk to Us</a>
+      <a href="#contact" class="btn btn--primary">Book a 30&#8209;min call</a>
     </div>
   </header>
 
-  <main id="top">
+  <main id="main" tabindex="-1">
+    <span id="top"></span>
     <!-- HERO -->
     <section class="hero">
       <canvas class="hero__canvas" aria-hidden="true"></canvas>
       <div class="hero__glow" aria-hidden="true"></div>
       <div class="container hero__content">
-        <img class="hero__logo" src="assets/img/ssb-logo-dark.webp" alt="SSB Soft" width="311" height="300" />
+        <span class="hero__logo-wrap">
+  <svg class="mark" viewBox="-2 -2 734 708" role="img" aria-label="SSB Soft">
+    <g class="mark__facets">
+      <polygon class="f f--d" style="--i:0" points="121,131 0,198 0,261 121,195"/>
+      <polygon class="f f--l" style="--i:1" points="0,325 0,390 122,456 122,393"/>
+      <polygon class="f f--l" style="--i:2" points="0,262 179,360 243,324 69,225"/>
+      <polygon class="f f--l" style="--i:3" points="123,131 123,196 243,261 243,198"/>
+      <polygon class="f f--d" style="--i:4" points="244,325 123,393 123,455 244,389"/>
+      <polygon class="f f--d" style="--i:5" points="364,0 244,70 244,135 364,67"/>
+      <polygon class="f f--m" style="--i:6" points="245,199 245,262 365,329 365,266"/>
+      <polygon class="f f--m" style="--i:7" points="244,135 423,234 487,198 311,98"/>
+      <polygon class="f f--m" style="--i:8" points="366,0 366,67 486,137 486,71"/>
+      <polygon class="f f--d" style="--i:9" points="486,198 367,266 367,328 487,263"/>
+      <polygon class="f f--l" style="--i:10" points="488,72 488,139 608,206 608,141"/>
+      <polygon class="f f--m" style="--i:11" points="546,173 547,421 608,455 608,207"/>
+      <polygon class="f f--d" style="--i:12" points="610,142 610,207 730,272 730,209"/>
+      <polygon class="f f--l" style="--i:13" points="730,273 672,242 611,275 667,307"/>
+      <polygon class="f f--d" style="--i:14" points="610,276 610,341 730,407 730,343"/>
+      <polygon class="f f--l" style="--i:15" points="730,407 660,374 610,395 610,455"/>
+    </g>
+    <path class="mark__word" fill-rule="evenodd" d="M259,557 256,564 256,635 259,641 271,651 284,656 306,660 360,660 375,658 391,653 403,646 408,640 411,633 411,566 405,554 397,548 379,541 360,538 307,538 278,544 265,551Z M284,559 294,550 310,546 356,546 367,548 377,553 382,558 386,569 386,629 382,640 370,649 357,652 310,652 291,646 284,639 281,632 281,566Z M69,560 67,566 68,577 75,586 83,591 111,598 175,600 187,605 193,611 197,620 197,633 190,644 181,649 168,652 80,652 80,660 180,659 205,652 219,641 222,635 222,616 219,610 209,601 195,595 173,591 125,591 111,589 100,584 95,579 92,570 95,555 107,548 118,546 209,546 209,538 110,539 96,542 80,549Z M581,494 581,537 554,538 555,546 581,547 581,635 584,641 591,648 609,656 631,660 658,660 658,652 635,652 617,647 608,638 606,632 606,547 658,546 658,538 607,538 606,494Z M534,494 487,495 462,502 451,509 447,514 444,521 444,537 431,538 431,546 444,547 444,704 469,704 469,547 508,546 508,538 470,538 470,520 473,514 483,506 500,502 534,502Z"/>
+  </svg>
+        </span>
         <p class="eyebrow reveal"><span class="pulse-dot"></span> Trusted by startups and global brands</p>
         <h1 class="hero__title">
           <span class="line"><span>We help you</span></span>
           <span class="line line--accent"><span class="rotator" aria-live="polite"><span class="rotator__word">launch</span></span></span>
           <span class="line"><span>with world&#8209;class engineers<span class="dot">.</span></span></span>
         </h1>
-        <p class="hero__sub reveal" style="--d:.5s">Our clients have scaled past $1M in revenue, raised millions in funding and been acquired. We build the products and the teams that get them there.</p>
+        <p class="hero__sub reveal" style="--d:.5s">Our clients have scaled past $1M&nbsp;in revenue, raised millions in funding and been acquired. We build the products and the teams that get them there.</p>
         <div class="hero__actions reveal" style="--d:.65s">
-          <a href="#contact" class="btn btn--primary btn--lg">Talk to Us <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          <a href="#case-studies" class="btn btn--ghost btn--lg">Success Stories</a>
+          <a href="#contact" class="btn btn--primary btn--lg">Book a 30&#8209;min call <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#case-studies" class="btn btn--ghost btn--lg">See our work</a>
         </div>
         <ul class="hero__chips reveal" style="--d:.8s">
-          <li><strong>72 hrs</strong> to hire engineers</li>
-          <li><strong>3 weeks</strong> to a market-ready MVP</li>
+          <li><strong>72&nbsp;hrs</strong> to hire engineers</li>
+          <li><strong>3&nbsp;weeks</strong> to a market-ready MVP</li>
           <li><strong>98%</strong> engineer retention</li>
         </ul>
       </div>
@@ -90,14 +123,14 @@
       <p class="logos__label">Trusted by startups and global leaders</p>
       <div class="marquee">
         <div class="marquee__track">
-          <img src="assets/logos/panasonic.webp" alt="Panasonic" style="--h:19px" loading="lazy" />
-          <img src="assets/logos/gofrugal.webp" alt="Gofrugal" style="--h:26px" loading="lazy" />
-          <img src="assets/logos/swirepay.webp" alt="Swirepay" style="--h:30px" loading="lazy" />
-          <img src="assets/logos/wondersoft.webp" alt="Wondersoft" style="--h:46px" loading="lazy" />
-          <img src="assets/logos/vitalsoft.webp" alt="Vitalsoft" style="--h:28px" loading="lazy" />
-          <img src="assets/logos/zoho.svg" alt="Zoho" style="--h:32px" loading="lazy" />
-          <img src="assets/logos/apnt.webp" alt="AP&amp;T" style="--h:40px" loading="lazy" />
-          <img src="assets/logos/opentap.webp" alt="Opentap" style="--h:44px" loading="lazy" />
+          <img width="215" height="33" src="assets/logos/panasonic.webp" alt="Panasonic" style="--h:19px" loading="lazy" />
+          <img width="599" height="154" src="assets/logos/gofrugal.webp" alt="Gofrugal" style="--h:26px" loading="lazy" />
+          <img width="471" height="160" src="assets/logos/swirepay.webp" alt="Swirepay" style="--h:30px" loading="lazy" />
+          <img width="220" height="137" src="assets/logos/wondersoft.webp" alt="Wondersoft" style="--h:46px" loading="lazy" />
+          <img width="463" height="112" src="assets/logos/vitalsoft.webp" alt="Vitalsoft" style="--h:28px" loading="lazy" />
+          <img width="1024" height="450" src="assets/logos/zoho.svg" alt="Zoho" style="--h:32px" loading="lazy" />
+          <img width="88" height="87" src="assets/logos/apnt.webp" alt="AP&amp;T" style="--h:40px" loading="lazy" />
+          <img width="193" height="122" src="assets/logos/opentap.webp" alt="Opentap" style="--h:44px" loading="lazy" />
         </div>
       </div>
     </section>
@@ -114,37 +147,37 @@
         </div>
         <div class="cases">
           <article class="case reveal">
-            <img class="case__logo" src="assets/logos/vitalsoft.webp" alt="Vitalsoft" style="--h:28px" loading="lazy" />
+            <img width="463" height="112" class="case__logo" src="assets/logos/vitalsoft.webp" alt="Vitalsoft" style="--h:28px" loading="lazy" />
             <p class="case__metric">Acquired by Zoho</p>
             <p>Vitalsoft created a modern SaaS for hospital management. We supported their team in building the MVP and finding product-market fit, leading to acquisition by Zoho.</p>
             <span class="case__tag">HealthTech · SaaS</span>
           </article>
           <article class="case reveal" style="--d:.08s">
-            <img class="case__logo" src="assets/logos/swirepay.webp" alt="Swirepay" style="--h:30px" loading="lazy" />
+            <img width="471" height="160" class="case__logo" src="assets/logos/swirepay.webp" alt="Swirepay" style="--h:30px" loading="lazy" />
             <p class="case__metric"><span data-count="5" data-prefix="$" data-suffix="M">$5M</span> Seed Raised</p>
-            <p>Our embedded engineers worked alongside Swirepay as they scaled their fintech platform to enterprise grade and secured $5M in seed funding.</p>
+            <p>Our embedded engineers worked alongside Swirepay as they scaled their fintech platform to enterprise grade and secured $5M&nbsp;in seed funding.</p>
             <span class="case__tag">FinTech · Payments</span>
           </article>
           <article class="case reveal" style="--d:.16s">
-            <img class="case__logo" src="assets/logos/opentap.webp" alt="Opentap" style="--h:40px" loading="lazy" />
+            <img width="193" height="122" class="case__logo" src="assets/logos/opentap.webp" alt="Opentap" style="--h:40px" loading="lazy" />
             <p class="case__metric"><span data-count="500" data-prefix="$" data-suffix="K">$500K</span> Pre-Seed</p>
-            <p>We developed Opentap’s MVP and supported them with vetted engineers until they secured $500K in pre-seed funding.</p>
+            <p>We developed Opentap’s MVP and supported them with vetted engineers until they secured $500K&nbsp;in pre-seed funding.</p>
             <span class="case__tag">MVP · Startup</span>
           </article>
           <article class="case reveal">
-            <img class="case__logo" src="assets/logos/gofrugal.webp" alt="Gofrugal" style="--h:26px" loading="lazy" />
+            <img width="599" height="154" class="case__logo" src="assets/logos/gofrugal.webp" alt="Gofrugal" style="--h:26px" loading="lazy" />
             <p class="case__metric"><span data-count="30000" data-suffix="+">30,000+</span> Clients Served</p>
-            <p>Gofrugal grew to serve over 30,000 retail and restaurant clients worldwide, with our engineers supporting them for 7+ years.</p>
+            <p>Gofrugal grew to serve over 30,000&nbsp;retail and restaurant clients worldwide, with our engineers supporting them for 7+&nbsp;years.</p>
             <span class="case__tag">Retail · ERP</span>
           </article>
           <article class="case reveal" style="--d:.08s">
-            <img class="case__logo" src="assets/logos/wondersoft.webp" alt="Wondersoft" style="--h:46px" loading="lazy" />
+            <img width="220" height="137" class="case__logo" src="assets/logos/wondersoft.webp" alt="Wondersoft" style="--h:46px" loading="lazy" />
             <p class="case__metric"><span data-count="25000">25,000</span> Retail Stores</p>
             <p>We built their Drools-based promotion engine, enabling real-time, complex retail offers at scale across global retail operations.</p>
             <span class="case__tag">Retail · Rules Engine</span>
           </article>
           <article class="case reveal" style="--d:.16s">
-            <img class="case__logo" src="assets/logos/apnt.webp" alt="AP&amp;T" style="--h:44px" loading="lazy" />
+            <img width="88" height="87" class="case__logo" src="assets/logos/apnt.webp" alt="AP&amp;T" style="--h:44px" loading="lazy" />
             <p class="case__metric">Retail Loyalty Platform</p>
             <p>AP&amp;T strengthened customer engagement for retail chains in Dubai by launching a POS-integrated loyalty platform with our support.</p>
             <span class="case__tag">Loyalty · POS</span>
@@ -172,7 +205,7 @@
             </button>
             <button role="tab" aria-selected="false" aria-controls="svc-staff" id="tab-staff" class="services__tab">
               <span class="services__num">02</span>
-              <span><strong>Staff Augmentation</strong><small>Engineers in 72 hours</small></span>
+              <span><strong>Staff Augmentation</strong><small>Engineers in&nbsp;72&nbsp;hours</small></span>
             </button>
             <button role="tab" aria-selected="false" aria-controls="svc-legacy" id="tab-legacy" class="services__tab">
               <span class="services__num">03</span>
@@ -186,34 +219,34 @@
               <div>
                 <h3>Launch an MVP</h3>
                 <p>We design MVPs built for acquisition and retention. Your product gets to market in weeks, giving you the traction to validate, raise and grow.</p>
-                <a href="#contact" class="btn btn--primary">Build Your MVP</a>
+                <a href="#contact" class="btn btn--primary">Plan my MVP</a>
               </div>
               <ul class="checks">
-                <li>Market-ready in 3 weeks</li>
+                <li>Market-ready in&nbsp;3&nbsp;weeks</li>
                 <li>Built for user acquisition and long-term retention</li>
                 <li>Clear growth path from MVP to scale</li>
               </ul>
-              <div class="proof"><span class="proof__label">Proof</span><span class="proof__item"><img src="assets/logos/opentap.webp" alt="Opentap" style="--h:30px" loading="lazy" />MVP to $500K pre-seed</span><span class="proof__item"><img src="assets/logos/vitalsoft.webp" alt="Vitalsoft" style="--h:22px" loading="lazy" />MVP to acquisition</span></div>
+              <div class="proof"><span class="proof__label">Proof</span><span class="proof__item"><img width="193" height="122" src="assets/logos/opentap.webp" alt="Opentap" style="--h:30px" loading="lazy" />MVP to $500K&nbsp;pre-seed</span><span class="proof__item"><img width="463" height="112" src="assets/logos/vitalsoft.webp" alt="Vitalsoft" style="--h:22px" loading="lazy" />MVP to acquisition</span></div>
             </div>
-            <div class="services__panel" role="tabpanel" id="svc-staff" aria-labelledby="tab-staff" hidden>
+            <div class="services__panel" role="tabpanel" id="svc-staff" aria-labelledby="tab-staff">
               <div>
                 <h3>Staff Augmentation</h3>
                 <p>Immediate access to experienced, vetted developers who integrate into your team within days. They stay long term, so product knowledge compounds instead of resetting.</p>
-                <a href="#contact" class="btn btn--primary">Build Your Team</a>
+                <a href="#contact" class="btn btn--primary">Meet our engineers</a>
               </div>
               <ul class="checks">
-                <li>Hire developers in 72 hours</li>
+                <li>Hire developers in&nbsp;72&nbsp;hours</li>
                 <li>Talent from acquired and funded startups</li>
-                <li>Continuity with a 98% retention rate</li>
+                <li>Continuity with a 98%&nbsp;retention rate</li>
                 <li>Right to hire your favourite developers full-time</li>
               </ul>
-              <div class="proof"><span class="proof__label">Proof</span><span class="proof__item"><img src="assets/logos/gofrugal.webp" alt="Gofrugal" style="--h:20px" loading="lazy" />7+ years embedded</span><span class="proof__item"><img src="assets/logos/swirepay.webp" alt="Swirepay" style="--h:24px" loading="lazy" />Scaled to a $5M seed</span></div>
+              <div class="proof"><span class="proof__label">Proof</span><span class="proof__item"><img width="599" height="154" src="assets/logos/gofrugal.webp" alt="Gofrugal" style="--h:20px" loading="lazy" />7+&nbsp;years embedded</span><span class="proof__item"><img width="471" height="160" src="assets/logos/swirepay.webp" alt="Swirepay" style="--h:24px" loading="lazy" />Scaled to a $5M&nbsp;seed</span></div>
             </div>
-            <div class="services__panel" role="tabpanel" id="svc-legacy" aria-labelledby="tab-legacy" hidden>
+            <div class="services__panel" role="tabpanel" id="svc-legacy" aria-labelledby="tab-legacy">
               <div>
                 <h3>Legacy Modernization</h3>
                 <p>We transform outdated applications into scalable, cloud-ready platforms using AI-driven approaches — from re-architecture to intelligent automation and UX redesign — without disrupting operations.</p>
-                <a href="#contact" class="btn btn--primary">Modernize with Us</a>
+                <a href="#contact" class="btn btn--primary">Plan a modernization</a>
               </div>
               <ul class="checks">
                 <li>Re-architected for scalability and security</li>
@@ -221,7 +254,7 @@
                 <li>User-friendly experiences for today’s customers</li>
                 <li>Smooth transition with minimal downtime</li>
               </ul>
-              <div class="proof"><span class="proof__label">Proof</span><span class="proof__item"><img src="assets/logos/wondersoft.webp" alt="Wondersoft" style="--h:30px" loading="lazy" />Promotions across 25,000 stores</span><span class="proof__item"><img src="assets/logos/apnt.webp" alt="AP&amp;T" style="--h:32px" loading="lazy" />POS-integrated loyalty</span></div>
+              <div class="proof"><span class="proof__label">Proof</span><span class="proof__item"><img width="220" height="137" src="assets/logos/wondersoft.webp" alt="Wondersoft" style="--h:30px" loading="lazy" />Promotions across 25,000&nbsp;stores</span><span class="proof__item"><img width="88" height="87" src="assets/logos/apnt.webp" alt="AP&amp;T" style="--h:32px" loading="lazy" />POS-integrated loyalty</span></div>
             </div>
           </div>
         </div>
@@ -259,7 +292,8 @@
     </section>
 
     <!-- WHY US -->
-    <section class="section section--dark" id="why-us">
+    <section class="section section--dark section--angled" id="why-us">
+      <div class="iso-grid" aria-hidden="true"></div>
       <div class="container">
         <div class="section__head section__head--split">
           <div>
@@ -270,22 +304,22 @@
         </div>
         <div class="features">
           <div class="feature reveal">
-            <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="feature__icon"><svg class="iso" viewBox="0 0 48 48" aria-hidden="true"><g><polygon class="t" points="17.1,18.0 24.0,22.0 17.1,26.0 10.1,22.0"/><polygon class="l" points="10.1,22.0 17.1,26.0 17.1,34.0 10.1,30.0"/><polygon class="r" points="17.1,26.0 24.0,22.0 24.0,30.0 17.1,34.0"/></g><g><polygon class="t" points="30.9,18.0 37.9,22.0 30.9,26.0 24.0,22.0"/><polygon class="l" points="24.0,22.0 30.9,26.0 30.9,34.0 24.0,30.0"/><polygon class="r" points="30.9,26.0 37.9,22.0 37.9,30.0 30.9,34.0"/></g><g><polygon class="t" points="24.0,22.0 30.9,26.0 24.0,30.0 17.1,26.0"/><polygon class="l" points="17.1,26.0 24.0,30.0 24.0,38.0 17.1,34.0"/><polygon class="r" points="24.0,30.0 30.9,26.0 30.9,34.0 24.0,38.0"/></g><g><polygon class="t" points="24.0,14.0 30.9,18.0 24.0,22.0 17.1,18.0"/><polygon class="l" points="17.1,18.0 24.0,22.0 24.0,30.0 17.1,26.0"/><polygon class="r" points="24.0,22.0 30.9,18.0 30.9,26.0 24.0,30.0"/></g></svg></div>
             <h3>Teams that Stay</h3>
-            <p>98% retention means knowledge compounds and delivery remains consistent.</p>
+            <p>98%&nbsp;retention means knowledge compounds and delivery remains consistent.</p>
           </div>
           <div class="feature reveal" style="--d:.08s">
-            <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+            <div class="feature__icon"><svg class="iso" viewBox="0 0 48 48" aria-hidden="true"><g><polygon class="t" points="24.0,11.0 37.0,18.5 24.0,26.0 11.0,18.5"/><polygon class="l" points="11.0,18.5 24.0,26.0 24.0,41.0 11.0,33.5"/><polygon class="r" points="24.0,26.0 37.0,18.5 37.0,33.5 24.0,41.0"/></g><path class="mk" d="M20.9,17.0 L20.9,20.3 L31.3,18.8"/></svg></div>
             <h3>Vetted Engineers</h3>
             <p>Developers with experience behind scaled startups and acquired SaaS products.</p>
           </div>
           <div class="feature reveal" style="--d:.16s">
-            <div class="feature__icon"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <div class="feature__icon"><svg class="iso" viewBox="0 0 48 48" aria-hidden="true"><g opacity="0.25"><polygon class="t" points="12.0,27.0 18.1,30.5 12.0,34.0 5.9,30.5"/><polygon class="l" points="5.9,30.5 12.0,34.0 12.0,41.0 5.9,37.5"/><polygon class="r" points="12.0,34.0 18.1,30.5 18.1,37.5 12.0,41.0"/></g><g opacity="0.5"><polygon class="t" points="21.0,22.0 27.1,25.5 21.0,29.0 14.9,25.5"/><polygon class="l" points="14.9,25.5 21.0,29.0 21.0,36.0 14.9,32.5"/><polygon class="r" points="21.0,29.0 27.1,25.5 27.1,32.5 21.0,36.0"/></g><g><polygon class="t" points="31.0,14.0 38.8,18.5 31.0,23.0 23.2,18.5"/><polygon class="l" points="23.2,18.5 31.0,23.0 31.0,32.0 23.2,27.5"/><polygon class="r" points="31.0,23.0 38.8,18.5 38.8,27.5 31.0,32.0"/></g></svg></div>
             <h3>Speed of Execution</h3>
-            <p>Engineers in 72 hours. MVPs in 3–6 weeks. Lean and fast by design.</p>
+            <p>Engineers in&nbsp;72&nbsp;hours. MVPs in&nbsp;3–6&nbsp;weeks. Lean and fast by design.</p>
           </div>
           <div class="feature reveal" style="--d:.24s">
-            <div class="feature__icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <div class="feature__icon"><svg class="iso" viewBox="0 0 48 48" aria-hidden="true"><g><polygon class="t" points="24.0,11.0 37.0,18.5 24.0,26.0 11.0,18.5"/><polygon class="l" points="11.0,18.5 24.0,26.0 24.0,41.0 11.0,33.5"/><polygon class="r" points="24.0,26.0 37.0,18.5 37.0,33.5 24.0,41.0"/></g><path class="kh" d="M19.6,29.1 L19.5,29.8 L19.2,30.3 L18.7,30.6 L18.1,30.6 L17.5,30.4 L16.9,29.9 L16.3,29.2 L15.8,28.4 L15.5,27.6 L15.4,26.8 L15.5,26.1 L15.8,25.6 L16.3,25.3 L16.9,25.3 L17.5,25.6 L18.1,26.0 L18.7,26.7 L19.2,27.5 L19.5,28.3 L19.6,29.1Z M16.6,29.2 L18.4,30.3 L19.1,34.9 L15.9,33.1Z"/></svg></div>
             <h3>Full Ownership</h3>
             <p>You own the code and the process — with the option to make the team yours.</p>
           </div>
@@ -316,7 +350,7 @@
               <figcaption><img src="assets/img/shankar.webp" alt="" width="56" height="56" loading="lazy" /><span><strong>Shankar</strong>CEO, Wondersoft</span></figcaption>
             </figure>
             <figure class="slide">
-              <blockquote>“SSB Soft delivered Phase 1 on time and within budget, even under pressure. They’ve proven to be a reliable partner who adds real value.”</blockquote>
+              <blockquote>“SSB Soft delivered Phase&nbsp;1&nbsp;on time and within budget, even under pressure. They’ve proven to be a reliable partner who adds real value.”</blockquote>
               <figcaption><img src="assets/img/senthil.webp" alt="" width="56" height="56" loading="lazy" /><span><strong>Senthil</strong>CEO, Opentap</span></figcaption>
             </figure>
             <figure class="slide">
@@ -345,21 +379,27 @@
         <div class="about__text">
           <p class="kicker reveal">About SSB</p>
           <h2 class="reveal" style="--d:.1s">The vision behind SSB Soft</h2>
-          <p class="reveal" style="--d:.2s">Magalingam J (Mali) has spent more than 20 years building products and teams that stand the test of time. Early in his career he built a healthcare platform that was later acquired — an experience that showed him what it takes to turn a bold idea into lasting impact.</p>
+          <p class="reveal" style="--d:.2s">Magalingam J (Mali) has spent more than 20&nbsp;years building products and teams that stand the test of time. Early in his career he built a healthcare platform that was later acquired — an experience that showed him what it takes to turn a bold idea into lasting impact.</p>
           <p class="reveal" style="--d:.3s">That lesson shapes everything at SSB Soft: small, senior teams, a relentless focus on outcomes, and partnerships measured in years, not sprints.</p>
-          <p class="about__sign reveal" style="--d:.4s"><strong>Magalingam J (Mali)</strong><span>Founder &amp; CEO</span></p>
+          <blockquote class="note reveal" style="--d:.4s">
+            <p>Every engagement starts the same way: understand the business first, then build. Small senior teams, honest timelines, and people who stay long enough for knowledge to compound. That’s how outcomes happen — and it’s the only way we know how to work.</p>
+            <footer class="note__sign">
+              <svg class="signature" viewBox="0 0 220 90" aria-hidden="true"><text x="6" y="66">Mali</text></svg>
+              <span><strong>Magalingam J (Mali)</strong>Founder &amp; CEO</span>
+            </footer>
+          </blockquote>
         </div>
       </div>
     </section>
 
     <!-- CTA -->
-    <section class="cta">
+    <section class="cta section--angled-top">
       <div class="container cta__inner reveal">
         <h2>Ready to build and scale?</h2>
-        <p>Takes only 30 minutes. No commitment required.</p>
+        <p>Takes only 30&nbsp;minutes. No commitment required.</p>
         <div class="hero__actions">
-          <a href="#contact" class="btn btn--light btn--lg">Book a Call</a>
-          <a href="#case-studies" class="btn btn--outline-light btn--lg">Success Stories</a>
+          <a href="#contact" class="btn btn--light btn--lg">Book a 30&#8209;min call</a>
+          <a href="#case-studies" class="btn btn--outline-light btn--lg">See our work</a>
         </div>
       </div>
     </section>
@@ -371,7 +411,7 @@
           <p class="kicker">Contact</p>
           <h2>Let’s build something great</h2>
           <p class="section__lede">Have a project in mind? We’d love to hear about it.</p>
-          <form class="form" novalidate>
+          <form class="form" action="mailto:contact@ssbsoft.com" method="post" enctype="text/plain" novalidate>
             <div class="field">
               <input id="f-email" name="email" type="email" placeholder=" " required autocomplete="email" />
               <label for="f-email">Your email</label>
@@ -381,11 +421,13 @@
               <label for="f-phone">Mobile number</label>
             </div>
             <div class="field">
-              <textarea id="f-msg" name="message" rows="4" placeholder=" " required></textarea>
+              <textarea id="f-msg" name="message" rows="4" placeholder=" " required aria-describedby="f-msg-hint"></textarea>
               <label for="f-msg">Tell us about your project</label>
+              <p class="field__hint" id="f-msg-hint">For example: “We need three React engineers by March” or “An MVP for a clinic booking app”.</p>
             </div>
             <button type="submit" class="btn btn--primary btn--lg btn--block">
-              <span class="btn__label">Send Message</span>
+              <span class="btn__label">Send message</span>
+              <svg class="btn__check" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
               <span class="btn__spinner" aria-hidden="true"></span>
             </button>
             <p class="form__status" role="status"></p>
@@ -397,7 +439,7 @@
           <h3>Frequently asked questions</h3>
           <details open>
             <summary>How fast can you deliver an MVP?</summary>
-            <div class="faq__body"><p>Most MVPs are delivered in 3 weeks. We focus on the feature set that proves value so you can raise or validate quickly.</p></div>
+            <div class="faq__body"><p>Most MVPs are delivered in&nbsp;3&nbsp;weeks. We focus on the feature set that proves value so you can raise or validate quickly.</p></div>
           </details>
           <details>
             <summary>What is Staff Augmentation?</summary>
@@ -416,10 +458,13 @@
     </section>
   </main>
 
+  <a href="#contact" class="dock btn btn--primary" aria-hidden="true" tabindex="-1">Book a 30&#8209;min call
+    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img src="assets/img/ssb-logo-dark-nav.webp" alt="SSB Soft" />
+        <img width="133" height="128" src="assets/img/ssb-logo-dark-nav.webp" alt="SSB Soft" />
         <p>Launch and scale with engineers.</p>
       </div>
       <nav class="footer__links" aria-label="Footer">
@@ -437,6 +482,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js?v=5"></script>
+  <script src="js/main.js?v=7" defer></script>
+  <script src="js/delight.js?v=2" defer></script>
 </body>
 </html>
