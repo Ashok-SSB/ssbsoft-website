@@ -86,7 +86,7 @@
      Paragraphs: words stay put and brighten as you read down the page.
      Both are tied to scroll position, so scrolling back rewinds them. */
   const HEADINGS = ".section__head h2, .about__text h2, .cta h2, .contact__form-wrap h2";
-  const PARAGRAPHS = ".section__head .section__lede, .about__text > p:not(.kicker), .note p, .cta__inner > p, .contact__form-wrap > .section__lede";
+  const PARAGRAPHS = ".section__head .section__lede, .about__text > p:not(.kicker), .note p, .cta__copy > p, .contact__form-wrap > .section__lede";
 
   const splitWords = (el) => {
     const words = [];

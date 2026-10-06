@@ -155,6 +155,46 @@
     a.innerHTML = `<span class="nl" aria-hidden="true"><span class="nl__a">${letters()}</span><span class="nl__b">${letters()}</span></span>`;
   });
 
+  /* ---------- "Ready to build": a calendar card that picks a slot ---------- */
+  const slotcard = $(".slotcard");
+  if (slotcard) {
+    const slots = $$(".slot", slotcard);
+    const open = slots.filter((el) => !el.classList.contains("is-taken"));
+    const clear = () => slots.forEach((el) => el.classList.remove("is-hover", "is-picked"));
+    if (reduceMotion) {
+      slotcard.classList.add("is-live", "is-done");
+      open[Math.min(5, open.length - 1)]?.classList.add("is-picked");
+    } else {
+      let timers = [], visible = false, running = false;
+      const later = (fn, ms) => timers.push(setTimeout(fn, ms));
+      const stop = () => { timers.forEach(clearTimeout); timers = []; running = false; };
+      const cycle = (again = false) => {
+        running = true;
+        clear();
+        slotcard.classList.remove("is-done");
+        slotcard.classList.add("is-live");
+        // the eye wanders over a few open slots, then settles on one
+        const picks = [...open].sort(() => Math.random() - .5).slice(0, 4);
+        let t = again ? 300 : 1100;
+        picks.slice(0, 3).forEach((el, i) => {
+          later(() => { clear(); el.classList.add("is-hover"); }, t + i * 520);
+        });
+        t += 3 * 520;
+        later(() => { clear(); picks[3].classList.add("is-picked"); slotcard.classList.add("is-done"); }, t);
+        // let go of the pick and wander again; the slots stay on the card
+        later(() => {
+          slotcard.classList.remove("is-done"); clear();
+          later(() => (visible ? cycle(true) : (running = false)), 600);
+        }, t + 3600);
+      };
+      new IntersectionObserver(([e]) => {
+        visible = e.isIntersecting;
+        if (visible && !running) cycle();
+        if (!visible) { stop(); slotcard.classList.remove("is-live", "is-done"); clear(); }
+      }, { threshold: .4 }).observe(slotcard);
+    }
+  }
+
   /* ---------- A hello for the curious ---------- */
   console.log(
     "%cSSB Soft%c\nCurious how this page was built? We like people who look under the hood.\nSay hello: contact@ssbsoft.com",
