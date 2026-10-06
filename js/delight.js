@@ -145,7 +145,7 @@
     });
   });
 
-  /* ---------- Top menu: letters roll, and a peek card glides between links ---------- */
+  /* ---------- Top menu: letters roll on hover ---------- */
   const navLinks = $$(".nav__links a");
   navLinks.forEach((a) => {
     const text = a.textContent.trim();
@@ -154,39 +154,6 @@
       `<span class="nl__ch" style="--i:${i}">${ch === " " ? "&nbsp;" : ch}</span>`).join("");
     a.innerHTML = `<span class="nl" aria-hidden="true"><span class="nl__a">${letters()}</span><span class="nl__b">${letters()}</span></span>`;
   });
-
-  const peek = $(".nav__peek"), peekText = $(".nav__peek-text");
-  const linksWrap = $(".nav__links");
-  if (peek && linksWrap && finePointer) {
-    let showTimer = 0, current = null;
-    const place = (a) => {
-      const center = a.offsetLeft + a.offsetWidth / 2;
-      peek.style.setProperty("--px", `${center}px`);
-    };
-    const swap = (a) => {
-      if (current === a) return;
-      current = a;
-      if (peek.classList.contains("is-on")) {
-        peekText.classList.add("is-swapping");
-        setTimeout(() => { peekText.textContent = a.dataset.peek; peekText.classList.remove("is-swapping"); }, 140);
-      } else {
-        peekText.textContent = a.dataset.peek;
-      }
-      place(a);
-    };
-    navLinks.forEach((a) => a.addEventListener("mouseenter", () => {
-      if (!a.dataset.peek) return;
-      if (peek.classList.contains("is-on")) { swap(a); return; }
-      clearTimeout(showTimer);
-      showTimer = setTimeout(() => { swap(a); peek.classList.add("is-on"); }, 260);
-    }));
-    linksWrap.addEventListener("mouseleave", () => {
-      clearTimeout(showTimer);
-      peek.classList.remove("is-on");
-      current = null;
-    });
-    navLinks.forEach((a) => a.addEventListener("click", () => { clearTimeout(showTimer); peek.classList.remove("is-on"); current = null; }));
-  }
 
   /* ---------- A hello for the curious ---------- */
   console.log(
