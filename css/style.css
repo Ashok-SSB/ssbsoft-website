@@ -827,6 +827,48 @@ img { transition: opacity .6s var(--ease); }
   .js .breeze.is-in .w { opacity: 1; transform: none; filter: none; }
 }
 
+/* ==========================================================
+   Code field — faint code behind "Engineering partners",
+   brought up by a soft light that follows the pointer
+   ========================================================== */
+.codefield {
+  --mx: 70%; --my: 40%; --r: 0px;
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  font: 400 12.5px/1.75 ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  color: rgba(203, 210, 222, .62);
+  /* faint everywhere, brighter inside the light, soft at the top and bottom */
+  -webkit-mask-image:
+    radial-gradient(circle var(--r) at var(--mx) var(--my), #000 0%, rgba(0, 0, 0, .5) 45%, rgba(0, 0, 0, .085) 100%),
+    linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(circle var(--r) at var(--mx) var(--my), #000 0%, rgba(0, 0, 0, .5) 45%, rgba(0, 0, 0, .085) 100%),
+    linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-composite: intersect;
+}
+.codefield__inner { position: absolute; inset: -60px -40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 56px; padding: 0 24px; }
+.codefield__col { display: flex; flex-direction: column; gap: 52px; will-change: transform; }
+.codefield__col:nth-child(2) { padding-top: 120px; }
+.codefield__col:nth-child(3) { padding-top: 40px; }
+.codefield__col:nth-child(4) { padding-top: 180px; }
+.codefield pre { margin: 0; font: inherit; white-space: pre; tab-size: 2; }
+.codefield i { font-style: normal; }
+.codefield .k { color: #f87171; }
+.codefield .s { color: #fca5a5; }
+.codefield .n { color: #fdba74; }
+.codefield .a { color: #fb7185; }
+.codefield .f { color: #f3f4f6; }
+.codefield .c { color: #6b7280; font-style: italic; }
+@media (max-width: 1024px) {
+  .codefield__inner { grid-template-columns: repeat(2, 1fr); }
+  .codefield__col:nth-child(n + 3) { display: none; }
+}
+@media (max-width: 600px) {
+  .codefield { font-size: 11px; }
+  .codefield__inner { grid-template-columns: 1fr; }
+  .codefield__col:nth-child(n + 2) { display: none; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
