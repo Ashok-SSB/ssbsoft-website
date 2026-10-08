@@ -525,23 +525,15 @@
   const dock = $(".dock");
   if (dock) {
     const heroEl = $(".hero"), contactEl = $("#contact");
-    let pastHero = false, atContact = false, goingDown = false, lastDockY = scrollY;
+    let pastHero = false, atContact = false;
     const set = () => {
-      const on = pastHero && !atContact && !goingDown;
+      const on = pastHero && !atContact;
       dock.classList.toggle("is-shown", on);
       dock.setAttribute("aria-hidden", !on);
       dock.tabIndex = on ? 0 : -1;
     };
     new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; set(); }).observe(heroEl);
     new IntersectionObserver(([e]) => { atContact = e.isIntersecting; set(); }, { threshold: .05 }).observe(contactEl);
-    // reading downwards: it gets out of the way; a small scroll up brings it back
-    addEventListener("scroll", () => {
-      const y = scrollY, d = y - lastDockY;
-      if (Math.abs(d) < 12) return;
-      const down = d > 0;
-      lastDockY = y;
-      if (down !== goingDown) { goingDown = down; set(); }
-    }, { passive: true });
   }
 
   /* ---------- Mobile: success stories swipe sideways, dots follow ---------- */
