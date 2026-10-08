@@ -3,7 +3,6 @@
    ========================================================== */
 @font-face { font-family: "Inter"; src: url("../assets/fonts/inter-latin.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 @font-face { font-family: "Plus Jakarta Sans"; src: url("../assets/fonts/jakarta-latin.woff2") format("woff2"); font-weight: 200 800; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "Allura"; src: url("../assets/fonts/allura-mali.woff2") format("woff2"); font-display: block; }
 
 :root {
   --red: #dc2626;
@@ -651,7 +650,7 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 .slide blockquote { text-indent: -.42em; hanging-punctuation: first last; }
 .slider__controls { justify-content: flex-start; }
 
-/* ---- Founder's note with a signature that writes itself ---- */
+/* ---- Founder's note ---- */
 .note { margin: 2rem 0 0; padding: 0; }
 .note p { position: relative; font: 500 1.12rem/1.65 var(--font-head); color: var(--ink-3); letter-spacing: -.005em; text-indent: -.45em; }
 .note p::before { content: "“"; }
@@ -659,13 +658,6 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 .note__sign { display: flex; align-items: center; gap: 18px; margin-top: 1.25rem; }
 .note__sign span { font-size: .9rem; color: var(--muted); line-height: 1.4; }
 .note__sign strong { display: block; color: var(--ink-2); font-family: var(--font-head); }
-.signature { width: 130px; height: 54px; overflow: visible; }
-.signature text { font: 64px "Allura", cursive; fill: var(--accent); stroke: var(--accent); stroke-width: .8; }
-.js .signature text { fill: transparent; stroke-dasharray: 420; stroke-dashoffset: 420; }
-.js .note.is-in .signature text { animation: sign 2.4s cubic-bezier(.6, 0, .3, 1) .5s forwards, ink .6s ease 2.5s forwards; }
-@keyframes sign { to { stroke-dashoffset: 0; } }
-@keyframes ink { to { fill: var(--accent); stroke-width: 0; } }
-
 /* ---- Form hints ---- */
 .field__hint { margin: .5rem 2px 0; font-size: .84rem; color: var(--muted); }
 
@@ -1052,6 +1044,5 @@ img { transition: opacity .6s var(--ease); }
   .marquee__track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; }
   .js .mark__word { opacity: 1; transform: none; }
   .js .mark__lines .o { opacity: 0; }
-  .js .signature text { fill: var(--accent); stroke-dashoffset: 0; }
 }
 #testimonials .section__head { max-width: 900px; text-align: left; }

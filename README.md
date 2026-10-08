@@ -13,7 +13,7 @@ js/form.js       contact form personality (focus line, email greeting, phone for
 js/codefield.js  faint code behind "Engineering partners", lit by a light that follows the pointer
 js/flow.js       momentum scrolling, scroll-linked hero and logo strip, image fade-in
 assets/vendor    Lenis smooth-scroll library (MIT), self-hosted
-assets/fonts     self-hosted Inter, Plus Jakarta Sans and the signature font
+assets/fonts     self-hosted Inter and Plus Jakarta Sans
 assets/icons     isometric brand icons (also inlined in index.html)
 assets/img       photos, brand logos, favicon, social share image
 assets/logos     client logos
