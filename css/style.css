@@ -1127,3 +1127,12 @@ html, body { overflow-x: clip; }
   .about__more svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s var(--ease); }
   .about__more[aria-expanded="true"] svg { transform: rotate(180deg); }
 }
+
+/* phones: the hero is centred, like desktop */
+@media (max-width: 600px) {
+  .hero__content { text-align: center; }
+  .hero__logo-wrap { margin: 0 auto 1.4rem; }
+  .hero__sub { margin-inline: auto; }
+  .hero__actions { justify-content: center; }
+  .hero__chips { justify-content: center; align-items: center; }
+}
