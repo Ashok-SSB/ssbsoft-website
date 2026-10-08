@@ -1136,3 +1136,149 @@ html, body { overflow-x: clip; }
   .hero__actions { justify-content: center; }
   .hero__chips { justify-content: center; align-items: center; }
 }
+
+/* ==========================================================
+   Mobile-first layer
+   Thumb reach, one idea per screen, touch feedback instead of
+   hover. Phones and small tablets only; desktop is untouched.
+   ========================================================== */
+html { -webkit-tap-highlight-color: transparent; }
+.sheet-backdrop { display: none; }
+
+/* ---- Menu: a bottom sheet ---- */
+@media (max-width: 860px) {
+  .sheet-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 140; background: rgba(9, 11, 17, .5);
+    backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+    opacity: 0; pointer-events: none; transition: opacity .35s var(--ease);
+  }
+  .nav__mobile {
+    display: flex; position: fixed; z-index: 150; top: auto; left: 0; right: 0; bottom: 0;
+    max-height: 85svh; overflow-y: auto; overscroll-behavior: contain;
+    padding: 10px 20px calc(20px + env(safe-area-inset-bottom));
+    border-radius: 24px 24px 0 0; background: var(--surface); clip-path: none;
+    box-shadow: 0 -20px 50px -20px rgba(0, 0, 0, .45);
+    transform: translateY(105%); transition: transform .5s cubic-bezier(.32, .72, 0, 1); visibility: hidden;
+  }
+  .sheet__handle { align-self: center; width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 0 0 10px; }
+  .nav__mobile a:not(.btn) {
+    display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 4px;
+    font-size: 1.15rem; border-bottom: 1px solid var(--line);
+  }
+  .nav__mobile a:not(.btn)::after {
+    content: ""; width: 8px; height: 8px; margin-right: 6px; border: solid var(--faint); border-width: 2px 2px 0 0; transform: rotate(45deg);
+  }
+  .nav__mobile a:not(.btn):active { color: var(--accent); }
+  .nav__mobile .btn { margin-top: 18px; min-height: 56px; font-size: 1.05rem; }
+  html.menu-open { overflow: hidden; }
+  html.menu-open .sheet-backdrop { opacity: 1; pointer-events: auto; }
+  html.menu-open .nav__mobile { transform: none; visibility: visible; transition: transform .5s cubic-bezier(.32, .72, 0, 1), visibility 0s; }
+  html:not(.menu-open) .nav__mobile { transition: transform .4s cubic-bezier(.32, .72, 0, 1), visibility 0s linear .4s; }
+  html.menu-open .nav__mobile a { animation: menuIn .45s var(--ease) both; }
+  html.menu-open .nav__mobile a:nth-of-type(2) { animation-delay: .04s; }
+  html.menu-open .nav__mobile a:nth-of-type(3) { animation-delay: .08s; }
+  html.menu-open .nav__mobile a:nth-of-type(4) { animation-delay: .12s; }
+  html.menu-open .nav__mobile a:nth-of-type(5) { animation-delay: .16s; }
+  html.menu-open .nav__mobile a:nth-of-type(6) { animation-delay: .2s; }
+  html.menu-open .dock { transform: translateY(160%); }
+
+  /* the booking bar respects the iPhone home bar and the screen edges */
+  .dock { left: max(16px, env(safe-area-inset-left)); right: max(16px, env(safe-area-inset-right)); bottom: max(16px, calc(env(safe-area-inset-bottom) + 8px)); min-height: 54px; }
+  .footer { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+}
+@keyframes menuIn { from { opacity: 0; transform: translateY(10px); } }
+
+@media (max-width: 600px) {
+  /* ---- Slimmer top bar ---- */
+  .nav__inner { height: 68px; }
+  .nav.is-scrolled .nav__inner { height: 60px; }
+  .nav__brand { height: 46px; }
+  .nav.is-scrolled .nav__brand { height: 40px; }
+  html { scroll-padding-top: 68px; }
+
+  /* ---- Hero: exactly one screen, actions in thumb reach ---- */
+  .hero { min-height: 100svh; padding: 84px 0 calc(32px + env(safe-area-inset-bottom)); }
+  .hero__logo-wrap { margin-bottom: 1rem; }
+  .hero__logo-wrap .mark { width: 60px; }
+  .hero .eyebrow { margin-bottom: 1.1rem; padding: .35rem .85rem; font-size: .8rem; }
+  .hero__title { font-size: clamp(2.2rem, 10.6vw, 2.8rem); margin-bottom: 1rem; }
+  .hero__sub { margin-bottom: 1.6rem; }
+  .hero__actions { gap: .7rem; }
+  .hero__actions .btn { min-height: 54px; }
+  .hero__chips {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 1.8rem;
+    padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, .1);
+  }
+  .hero__chips li { padding: 0 6px; font-size: .74rem; line-height: 1.35; color: rgba(255, 255, 255, .6); }
+  .hero__chips li + li { border-left: 1px solid rgba(255, 255, 255, .1); }
+  .hero__chips strong { display: block; margin: 0 0 .2rem; font: 700 1.12rem/1.2 var(--font-head); }
+  .hero__scroll { display: none; }
+
+  /* ---- Success stories: the result leads ---- */
+  .cases .case { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto 1fr auto; column-gap: 12px; align-items: center; }
+  .case__metric { grid-column: 1 / -1; grid-row: 1; font-size: 1.7rem; margin-bottom: .6rem; }
+  .case p:not(.case__metric) { grid-column: 1 / -1; grid-row: 2; align-self: start; margin-bottom: 0; }
+  .case__logo { grid-column: 1; grid-row: 3; height: calc(var(--h, 32px) * .8); margin: 20px 0 0; }
+  .case__tag { grid-column: 2; grid-row: 3; margin: 20px 0 0; }
+
+  /* ---- Services: the switch stays pinned while you read ---- */
+  .services__tabs {
+    position: sticky; top: 68px; z-index: 5;
+    background: var(--chip);
+    /* the section colour fills the gap under the top bar, so nothing peeks through */
+    box-shadow: 0 -12px 0 4px var(--tint), 0 10px 24px -14px rgba(15, 23, 42, .35);
+  }
+  .services__tab { min-height: 48px; }
+
+  /* ---- Process: a vertical timeline ---- */
+  .process { gap: 0; }
+  .step { display: grid; grid-template-columns: 52px 1fr; column-gap: 18px; text-align: left; padding: 0 0 36px; }
+  .step:last-child { padding-bottom: 0; }
+  .step__num { grid-row: 1 / span 2; width: 52px; height: 52px; margin: 0; font-size: .95rem; }
+  .step h3 { margin: 12px 0 .4rem; font-size: 1.15rem; }
+  .step p { margin: 0; max-width: none; }
+  .step:not(:last-child)::before {
+    content: ""; position: absolute; left: 25px; top: 52px; bottom: 0; border-left: 2px dashed var(--line);
+  }
+  .step:not(:last-child)::after {
+    content: ""; position: absolute; left: 25px; top: 52px; bottom: 0; width: 2px; background: var(--red);
+    transform: scaleY(0); transform-origin: top; transition: transform .6s var(--ease);
+  }
+  .step:has(+ .step.is-lit)::after { transform: none; }
+
+  /* ---- Why us: a compact 2×2 ---- */
+  .features { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .feature { padding: 18px 16px; }
+  .feature__icon { width: 42px; height: 42px; border-radius: 12px; margin-bottom: 14px; }
+  .feature__icon .ico { width: 24px; height: 24px; }
+  .feature h3 { font-size: 1rem; line-height: 1.3; margin-bottom: .4rem; }
+  .feature p { font-size: .85rem; line-height: 1.5; }
+
+  /* ---- Testimonials: swipe ---- */
+  .slider__viewport { touch-action: pan-y; }
+  .slider__btn { width: 48px; height: 48px; }
+
+  /* ---- Form: no iPhone zoom, big send button ---- */
+  .field input, .field textarea { font-size: 16px; }
+  .form .btn--lg { min-height: 56px; }
+}
+
+/* ---- Touch: a crisp press instead of hover ---- */
+@media (hover: none) {
+  .btn, .chip, .slider__btn, .services__tab, .faq summary { -webkit-user-select: none; user-select: none; }
+  .btn:active, .chip:active, .slider__btn:active { transform: scale(.97); transition-duration: .08s; }
+  .case:active, .feature:active { transform: scale(.985); transition-duration: .12s; }
+  .faq summary:active { opacity: .7; }
+}
+
+/* short phones (iPhone SE, mini): the hero still fits one screen */
+@media (max-width: 600px) and (max-height: 740px) {
+  .hero { padding-top: 74px; padding-bottom: 20px; }
+  .hero__logo-wrap { margin-bottom: .7rem; }
+  .hero__logo-wrap .mark { width: 48px; }
+  .hero .eyebrow { margin-bottom: .8rem; }
+  .hero__title { font-size: clamp(2rem, 9.6vw, 2.5rem); margin-bottom: .75rem; }
+  .hero__sub { margin-bottom: 1.15rem; }
+  .hero__actions .btn { min-height: 50px; padding-block: .8rem; }
+  .hero__chips { margin-top: 1.15rem; padding-top: .9rem; }
+}

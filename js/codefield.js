@@ -121,6 +121,13 @@ WHERE  mvp_shipped = true
   section.prepend(field);
 
   if (reduceMotion) { field.style.setProperty("--r", "0px"); return; }
+  // touch screens: a still, soft light; no animation loop to drain the battery
+  if (!finePointer) {
+    field.style.setProperty("--mx", "72%");
+    field.style.setProperty("--my", "30%");
+    field.style.setProperty("--r", "240px");
+    return;
+  }
 
   /* Light: follows the pointer smoothly; drifts on its own for touch */
   const light = { x: .7, y: .4, r: 0 }, target = { x: .7, y: .4, r: 0 };

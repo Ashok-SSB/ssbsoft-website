@@ -46,10 +46,10 @@
     const target = { x: .7, y: .5 }, pointer = { x: .7, y: .5 };
     let W, H, dpr, t = 0, running = true;
     const born = performance.now();
-    const LINES = 34, STEP = 6;
+    const LINES = innerWidth < 600 ? 22 : 34, STEP = innerWidth < 600 ? 8 : 6; // fewer, coarser lines on phones
 
     const size = () => {
-      dpr = Math.min(devicePixelRatio || 1, 2);
+      dpr = Math.min(devicePixelRatio || 1, innerWidth < 600 ? 1.5 : 2);
       W = hero.clientWidth; H = hero.clientHeight;
       heroCanvas.width = W * dpr; heroCanvas.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -211,17 +211,48 @@
   $(".nav__links").addEventListener("mouseleave", hidePill);
   addEventListener("resize", () => placeDot(current));
 
-  /* ---------- Mobile menu ---------- */
+  /* ---------- Mobile menu: a bottom sheet, swipe down or tap outside to close ---------- */
   const toggle = $(".nav__toggle");
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("is-open");
+  const sheet = $(".nav__mobile"), backdrop = $(".sheet-backdrop");
+  const lenisOf = () => window.ssbFlow?.lenis;
+  const isMenuOpen = () => document.documentElement.classList.contains("menu-open");
+  const setMenu = (open) => {
+    document.documentElement.classList.toggle("menu-open", open);
     toggle.setAttribute("aria-expanded", open);
     toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-  });
-  $$(".nav__mobile a").forEach((a) => a.addEventListener("click", () => {
-    nav.classList.remove("is-open");
-    toggle.setAttribute("aria-expanded", "false");
+    sheet.setAttribute("aria-hidden", !open);
+    sheet.inert = !open;
+    lenisOf()?.[open ? "stop" : "start"]();
+    if (open) $("a", sheet).focus({ preventScroll: true });
+  };
+  toggle.addEventListener("click", () => setMenu(!isMenuOpen()));
+  backdrop.addEventListener("click", () => { setMenu(false); toggle.focus({ preventScroll: true }); });
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && isMenuOpen()) { setMenu(false); toggle.focus({ preventScroll: true }); } });
+  $$("a", sheet).forEach((a) => a.addEventListener("click", (e) => {
+    const target = $(a.getAttribute("href"));
+    if (!target) return;
+    e.preventDefault();
+    setMenu(false);
+    requestAnimationFrame(() => {
+      const lenis = lenisOf();
+      if (lenis) lenis.scrollTo(target, { offset: -nav.offsetHeight - 8, duration: 1.1 });
+      else target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+    });
   }));
+  // drag the sheet down to dismiss it
+  let sy = null, dy = 0;
+  sheet.addEventListener("touchstart", (e) => { sy = e.touches[0].clientY; dy = 0; sheet.style.transition = "none"; }, { passive: true });
+  sheet.addEventListener("touchmove", (e) => {
+    if (sy === null) return;
+    dy = Math.max(0, e.touches[0].clientY - sy);
+    sheet.style.transform = `translateY(${dy}px)`;
+  }, { passive: true });
+  sheet.addEventListener("touchend", () => {
+    sheet.style.transition = ""; sheet.style.transform = "";
+    if (dy > 70) setMenu(false);
+    sy = null;
+  });
+  matchMedia("(min-width: 861px)").addEventListener("change", (e) => { if (e.matches && isMenuOpen()) setMenu(false); });
 
   /* ---------- Services tabs ---------- */
   const tabs = $$(".services__tab");
@@ -255,7 +286,16 @@
   };
   tabs.forEach((t, i) => {
     t.tabIndex = t.classList.contains("is-active") ? 0 : -1;
-    t.addEventListener("click", () => activate(t));
+    t.addEventListener("click", () => {
+      activate(t);
+      const tabsEl = t.parentElement, wrap = tabsEl.parentElement;
+      if (getComputedStyle(tabsEl).position !== "sticky") return;
+      const top = wrap.getBoundingClientRect().top - nav.offsetHeight - 8;
+      if (top < 0) {
+        const lenis = lenisOf();
+        if (lenis) lenis.scrollTo(scrollY + top, { duration: .7 }); else scrollTo({ top: scrollY + top, behavior: "smooth" });
+      }
+    });
     t.addEventListener("keydown", (e) => {
       const k = e.key;
       if (!["ArrowDown", "ArrowRight", "ArrowUp", "ArrowLeft"].includes(k)) return;
@@ -354,13 +394,27 @@
     }, { threshold: .4 }).observe(slider);
 
     // swipe
-    let sx = null;
-    slider.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
-    slider.addEventListener("touchend", (e) => {
+    let sx = null, sy0 = 0, dragX = 0, dragging = false;
+    const viewport = $(".slider__viewport", slider);
+    viewport.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; sy0 = e.touches[0].clientY; dragX = 0; dragging = false; stop(); }, { passive: true });
+    viewport.addEventListener("touchmove", (e) => {
       if (sx === null) return;
-      const dx = e.changedTouches[0].clientX - sx;
-      if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1), dx < 0 ? 1 : -1);
-      sx = null;
+      const dx = e.touches[0].clientX - sx, dyy = e.touches[0].clientY - sy0;
+      if (!dragging && Math.abs(dx) > 8 && Math.abs(dx) > Math.abs(dyy)) dragging = true;
+      if (!dragging) return;
+      dragX = dx;
+      const cur = slides[idx];
+      cur.style.transition = "none";
+      cur.style.transform = `translateX(${dx * .6}px)`;
+      cur.style.opacity = String(Math.max(.35, 1 - Math.abs(dx) / 400));
+    }, { passive: true });
+    viewport.addEventListener("touchend", () => {
+      if (sx === null) return;
+      const cur = slides[idx];
+      cur.style.transition = ""; cur.style.opacity = "";
+      if (dragging && Math.abs(dragX) > 50) go(idx + (dragX < 0 ? 1 : -1), dragX < 0 ? 1 : -1);
+      else { cur.style.transform = ""; play(); }
+      sx = null; dragging = false;
     });
 
     slides.forEach((s) => s.classList.remove("is-active"));
@@ -471,15 +525,23 @@
   const dock = $(".dock");
   if (dock) {
     const heroEl = $(".hero"), contactEl = $("#contact");
-    let pastHero = false, atContact = false;
+    let pastHero = false, atContact = false, goingDown = false, lastDockY = scrollY;
     const set = () => {
-      const on = pastHero && !atContact;
+      const on = pastHero && !atContact && !goingDown;
       dock.classList.toggle("is-shown", on);
       dock.setAttribute("aria-hidden", !on);
       dock.tabIndex = on ? 0 : -1;
     };
     new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; set(); }).observe(heroEl);
     new IntersectionObserver(([e]) => { atContact = e.isIntersecting; set(); }, { threshold: .05 }).observe(contactEl);
+    // reading downwards: it gets out of the way; a small scroll up brings it back
+    addEventListener("scroll", () => {
+      const y = scrollY, d = y - lastDockY;
+      if (Math.abs(d) < 12) return;
+      const down = d > 0;
+      lastDockY = y;
+      if (down !== goingDown) { goingDown = down; set(); }
+    }, { passive: true });
   }
 
   /* ---------- Mobile: success stories swipe sideways, dots follow ---------- */

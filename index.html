@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>SSB Soft — Launch and Scale with Engineers</title>
   <meta name="description" content="SSB Soft helps startups and global brands launch MVPs, build embedded engineering teams and modernize legacy systems." />
   <link rel="canonical" href="https://ssbsoft.com/" />
@@ -29,7 +29,7 @@
   </script>
   <link rel="preload" href="assets/fonts/jakarta-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="css/style.css?v=51" />
+  <link rel="stylesheet" href="css/style.css?v=54" />
   <link rel="stylesheet" href="css/print.css?v=1" media="print" />
 </head>
 <body>
@@ -56,17 +56,21 @@
         <svg class="theme__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
       </button>
       <a href="#contact" class="btn btn--primary btn--sm nav__cta btn--cal"><svg class="bi btn__cal" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="2.5"/><path class="btn__cal-top" d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg><span class="roll" data-alt="Pick a time"><span>Book a call</span></span></a>
-      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
-    </div>
-    <div class="nav__mobile">
-      <a href="#services">Services</a>
-      <a href="#case-studies">Success Stories</a>
-      <a href="#process">Process</a>
-      <a href="#why-us">Why Us</a>
-      <a href="#about">About</a>
-      <a href="#contact" class="btn btn--primary">Book a call</a>
+      <button class="nav__toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
     </div>
   </header>
+
+  <!-- Mobile menu: a bottom sheet within thumb reach -->
+  <div class="sheet-backdrop" aria-hidden="true"></div>
+  <div class="nav__mobile" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true" inert>
+    <span class="sheet__handle" aria-hidden="true"></span>
+    <a href="#services">Services</a>
+    <a href="#case-studies">Success Stories</a>
+    <a href="#process">Process</a>
+    <a href="#why-us">Why Us</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="btn btn--primary">Book a call</a>
+  </div>
 
   <main id="main" tabindex="-1">
     <span id="top"></span>
@@ -540,9 +544,9 @@
 
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="js/flow.js?v=5" defer></script>
-  <script src="js/main.js?v=13" defer></script>
+  <script src="js/main.js?v=14" defer></script>
   <script src="js/delight.js?v=13" defer></script>
-  <script src="js/codefield.js?v=1" defer></script>
+  <script src="js/codefield.js?v=2" defer></script>
   <script src="js/form.js?v=1" defer></script>
 </body>
 </html>
