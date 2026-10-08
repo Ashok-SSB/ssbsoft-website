@@ -1087,3 +1087,7 @@ html, body { overflow-x: clip; }
   .copy { width: 40px; height: 40px; }
 }
 @keyframes faqFade { from { opacity: 0; } }
+
+/* the hero logo hands over to the nav logo: never two on screen */
+.hero__logo-wrap { transition: opacity .3s var(--ease); }
+.hero__logo-wrap.is-handed-off { opacity: 0; }

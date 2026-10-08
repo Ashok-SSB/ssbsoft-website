@@ -151,7 +151,7 @@
 
   /* ---------- Nav: scrolled state, hide on scroll down, progress ---------- */
   const nav = $("#nav");
-  const heroLogo = $(".hero__logo");
+  const heroLogo = $(".hero__logo-wrap");
   const progress = $(".scroll-progress");
   let lastY = scrollY, ticking = false;
   const onScroll = () => {
@@ -159,12 +159,15 @@
     progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
     nav.classList.toggle("is-scrolled", y > 40);
     // the big hero logo is on screen: keep the nav logo out of the way until it scrolls off
-    nav.classList.toggle("at-hero", !!heroLogo && heroLogo.getBoundingClientRect().bottom > 70);
+    const atHero = !!heroLogo && heroLogo.getBoundingClientRect().bottom > nav.offsetHeight;
+    nav.classList.toggle("at-hero", atHero);
+    heroLogo?.classList.toggle("is-handed-off", !atHero); // only one logo on screen at a time
     lastY = y;
     updateProcess();
     ticking = false;
   };
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  addEventListener("resize", onScroll);
 
   /* ---------- Nav: hover pill glides between links; a dot marks the current section ---------- */
   const links = $$(".nav__links a");
@@ -275,7 +278,7 @@
     process.style.setProperty("--p", p.toFixed(3));
     steps.forEach((s, i) => s.classList.toggle("is-lit", p >= i / (steps.length - 1) - .02));
   }
-  updateProcess();
+  onScroll(); // also sets the nav state for a page that opens part-way down
 
   /* ---------- Testimonial slider ---------- */
   const slider = $(".slider");
