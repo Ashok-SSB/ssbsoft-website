@@ -1199,7 +1199,7 @@ html { -webkit-tap-highlight-color: transparent; }
   /* ---- Hero: exactly one screen, actions in thumb reach ---- */
   .hero { min-height: 100svh; padding: 84px 0 calc(32px + env(safe-area-inset-bottom)); }
   .hero__logo-wrap { margin-bottom: 1rem; }
-  .hero__logo-wrap .mark { width: 60px; }
+  .hero__logo-wrap .mark { width: 96px; }
   .hero .eyebrow { margin-bottom: 1.1rem; padding: .35rem .85rem; font-size: .8rem; }
   .hero__title { font-size: clamp(2.2rem, 10.6vw, 2.8rem); margin-bottom: 1rem; }
   .hero__sub { margin-bottom: 1.6rem; }
@@ -1273,9 +1273,9 @@ html { -webkit-tap-highlight-color: transparent; }
 
 /* short phones (iPhone SE, mini): the hero still fits one screen */
 @media (max-width: 600px) and (max-height: 740px) {
-  .hero { padding-top: 74px; padding-bottom: 20px; }
+  .hero { padding-top: 68px; padding-bottom: 16px; }
   .hero__logo-wrap { margin-bottom: .7rem; }
-  .hero__logo-wrap .mark { width: 48px; }
+  .hero__logo-wrap .mark { width: 64px; }
   .hero .eyebrow { margin-bottom: .8rem; }
   .hero__title { font-size: clamp(2rem, 9.6vw, 2.5rem); margin-bottom: .75rem; }
   .hero__sub { margin-bottom: 1.15rem; }
