@@ -987,9 +987,10 @@ img { transition: opacity .6s var(--ease); }
 .field label { transition: transform .45s var(--spring), color .25s; }
 
 /* 2. greeting under the email */
-.field__note { display: grid; grid-template-rows: 0fr; margin-top: -18px; transition: grid-template-rows .45s var(--ease), margin .45s var(--ease); }
-.field__note > p { overflow: hidden; margin: 0; padding-left: 4px; font-size: .88rem; font-weight: 500; color: var(--ink-3); opacity: 0; transform: translateY(-4px); transition: opacity .35s var(--ease), transform .45s var(--spring); }
-.field__note.is-on { grid-template-rows: 1fr; margin-top: -8px; }
+.form > .field:has(+ .field__note) { margin-bottom: -18px; } /* the note shares this row gap until it appears */
+.field__note { display: grid; grid-template-rows: 0fr; margin-top: 0; transition: grid-template-rows .45s var(--ease), margin .45s var(--ease); }
+.field__note > p { overflow: hidden; min-height: 0; margin: 0; padding-left: 4px; font-size: .88rem; font-weight: 500; color: var(--ink-3); opacity: 0; transform: translateY(-4px); transition: opacity .35s var(--ease), transform .45s var(--spring); }
+.field__note.is-on { grid-template-rows: 1fr; margin-top: 14px; }
 .field__note.is-on > p { opacity: 1; transform: none; }
 
 /* 4. quick-start chips */
@@ -1046,3 +1047,41 @@ img { transition: opacity .6s var(--ease); }
   .js .mark__lines .o { opacity: 0; }
 }
 #testimonials .section__head { max-width: 900px; text-align: left; }
+
+/* ==========================================================
+   Mobile pass — no sideways scroll, comfortable touch targets
+   ========================================================== */
+html, body { overflow-x: clip; }
+.slider__viewport { overflow-x: clip; overflow-clip-margin: 24px; }
+.footer__mailwrap { display: inline-flex; align-items: center; }
+
+/* bigger hit area for the slim slider dashes, without changing how they look */
+.slider__dot { overflow: visible; }
+.slider__dot i { border-radius: inherit; overflow: hidden; }
+.slider__dot::before { content: ""; position: absolute; inset: -18px -4px; }
+
+@media (max-width: 600px) {
+  .section { padding: 64px 0; }
+  .section__head { margin-bottom: 36px; }
+  .case { padding: 24px; }
+  .feature { padding: 24px 22px; }
+
+  /* founder photo: a portrait, not a full screen */
+  .portrait, .about__frame { max-width: 300px; }
+  .about__frame img { height: auto; aspect-ratio: 1 / 1.1; }
+
+  /* code behind "What sets us apart" stays out of the way of the text */
+  .codefield { opacity: .55; }
+
+  /* FAQ answers wrap as normal sentences on a narrow screen */
+  .js .faq details[open] .faq__s { display: inline; animation-name: faqFade; }
+  .faq__body p { padding-left: 0; }
+
+  /* touch targets */
+  .chip { padding: .6rem .95rem; }
+  .footer__links { gap: 4px 24px; }
+  .footer__links a, .footer__top { display: inline-block; padding: 8px 0; }
+  .footer__bottom { align-items: center; }
+  .copy { width: 40px; height: 40px; }
+}
+@keyframes faqFade { from { opacity: 0; } }
