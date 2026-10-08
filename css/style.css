@@ -294,11 +294,6 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 .services__bar::before { content: ""; position: absolute; left: 0; top: 18%; bottom: 18%; width: 3px; border-radius: 3px; background: var(--grad); }
 .services__panels { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: clamp(28px, 4vw, 52px); overflow: hidden; }
 .services__panel { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; }
-.proof { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 36px; padding-top: 28px; border-top: 1px solid var(--line); }
-.proof__label { font: 600 .72rem/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
-.proof__item { display: inline-flex; align-items: center; gap: 12px; font-size: .9rem; font-weight: 500; color: var(--ink-3); }
-.proof__item img { height: var(--h); width: auto; }
-.services__panel.is-active .proof { animation: panelIn .5s var(--ease) .4s both; }
 .services__panel[hidden] { display: none; }
 .services__panel.is-active > * { animation: panelIn .6s var(--ease) both; }
 .services__panel.is-active > *:nth-child(2) { animation-delay: .1s; }
@@ -397,17 +392,6 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 .about__sign strong { display: block; color: var(--ink-2); font-family: var(--font-head); }
 .about__sign span { font-size: .9rem; }
 
-/* ---------- CTA ---------- */
-.cta { position: relative; padding: clamp(72px, 9vw, 110px) 0; background: var(--grad); color: #fff; text-align: center; overflow: hidden; }
-.cta::before, .cta::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); }
-.cta::before { width: 520px; height: 520px; left: -160px; top: -260px; }
-.cta::after { width: 380px; height: 380px; right: -120px; bottom: -200px; }
-@keyframes gradShift { 50% { background-position: 100% 50%; } }
-@keyframes spin { to { transform: rotate(360deg); } }
-.cta h2 { color: #fff; font-size: clamp(2rem, 4.4vw, 3.4rem); margin-bottom: .75rem; }
-.cta p { color: rgba(255,255,255,.85); font-size: 1.1rem; margin-bottom: 2.2rem; }
-.cta__inner { position: relative; }
-
 /* ---------- Contact ---------- */
 .contact { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 96px); align-items: start; }
 .contact__form-wrap h2 { margin-bottom: .25rem; }
@@ -425,6 +409,7 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 .field.is-invalid input, .field.is-invalid textarea { border-color: var(--red); animation: shake .4s; }
 @keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 .btn__spinner { display: none; width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 .btn.is-loading .btn__spinner { display: inline-block; }
 .btn.is-loading .btn__label { opacity: .7; }
 .form__status { min-height: 1.5em; margin: 0; font-size: .95rem; font-weight: 500; }
@@ -687,7 +672,7 @@ p { margin: 0 0 1rem; text-wrap: pretty; }
 /* ---- Focus, selection, scrollbar ---- */
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; animation: focusIn .25s var(--ease); }
 @keyframes focusIn { from { outline-offset: 7px; } }
-.section--dark :focus-visible, .hero :focus-visible, .footer :focus-visible, .cta :focus-visible { outline-color: #fca5a5; }
+.section--dark :focus-visible, .hero :focus-visible, .footer :focus-visible { outline-color: #fca5a5; }
 ::selection { background: rgba(220, 38, 38, .18); }
 .hero ::selection, .section--dark ::selection, .footer ::selection { background: rgba(248, 113, 113, .35); color: #fff; }
 html { scrollbar-width: thin; scrollbar-color: rgba(127, 135, 150, .45) transparent; }
@@ -718,8 +703,7 @@ main:focus { outline: none; }
 
 /* ---- Dark theme specifics (logos and images) ---- */
 :root[data-theme="dark"] .marquee__track img,
-:root[data-theme="dark"] .case__logo,
-:root[data-theme="dark"] .proof__item img { filter: brightness(0) invert(1); opacity: .62; }
+:root[data-theme="dark"] .case__logo { filter: brightness(0) invert(1); opacity: .62; }
 :root[data-theme="dark"] .marquee__track img:hover { opacity: .95; }
 :root[data-theme="dark"] .nav.is-scrolled .nav__logo--light { opacity: 1; }
 :root[data-theme="dark"] .nav.is-scrolled .nav__logo--color { opacity: 0; }
@@ -729,8 +713,7 @@ main:focus { outline: none; }
 :root[data-theme="dark"] .btn--light { background: #fff; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .marquee__track img,
-  :root:not([data-theme="light"]) .case__logo,
-  :root:not([data-theme="light"]) .proof__item img { filter: brightness(0) invert(1); opacity: .62; }
+  :root:not([data-theme="light"]) .case__logo { filter: brightness(0) invert(1); opacity: .62; }
   :root:not([data-theme="light"]) .nav.is-scrolled .nav__logo--light,
   :root:not([data-theme="light"]) .nav.is-open .nav__logo--light { opacity: 1; }
   :root:not([data-theme="light"]) .nav.is-scrolled .nav__logo--color,
@@ -813,7 +796,7 @@ img { transition: opacity .6s var(--ease); }
    ========================================================== */
 .breeze .w { display: inline-block; text-indent: 0; }
 /* containers that hold breezing text stay still, so the words carry the motion */
-.js .cta__inner.reveal, .js .contact__form-wrap.reveal, .js .note.reveal { opacity: 1; transform: none; animation: none; transition: none; }
+.js .contact__form-wrap.reveal, .js .note.reveal { opacity: 1; transform: none; animation: none; transition: none; }
 
 @supports (animation-timeline: view()) {
   /* headings: each word lifts a little and comes into focus, left to right */
@@ -1002,54 +985,6 @@ img { transition: opacity .6s var(--ease); }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .theme:hover .theme__moon { transform: rotate(-18deg); } }
 
 /* ==========================================================
-   "Ready to build and scale?" — a live calendar card
-   ========================================================== */
-.cta__inner--split { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(40px, 6vw, 88px); align-items: center; text-align: left; }
-.cta__inner--split .hero__actions { justify-content: flex-start; }
-.cta__inner--split p { margin-bottom: 2rem; }
-
-.slotcard {
-  --ink: #111827;
-  display: block; justify-self: end; width: min(400px, 100%); padding: 22px 22px 18px; border-radius: 22px;
-  background: #fff; color: var(--ink); text-align: left;
-  box-shadow: 0 40px 80px -30px rgba(69, 10, 10, .65), 0 0 0 1px rgba(255, 255, 255, .6) inset;
-  transform: rotate(1.5deg); transition: transform .6s var(--spring);
-  animation: cardFloat 7s ease-in-out infinite;
-}
-.slotcard:hover { transform: rotate(0deg) translateY(-4px); }
-@keyframes cardFloat { 50% { translate: 0 -8px; } }
-.slotcard__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-.slotcard__title { display: inline-flex; align-items: center; gap: 8px; font: 700 1.02rem/1 var(--font-head); color: var(--ink); }
-.slotcard__dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34, 197, 94, .5); animation: pulse 2s infinite; }
-.slotcard__meta { font-size: .78rem; color: #6b7280; }
-.slotcard__days, .slotcard__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
-.slotcard__days { margin-bottom: 8px; }
-.slotcard__days span { font: 600 .7rem/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: #9ca3af; text-align: center; }
-.slot {
-  display: grid; place-items: center; height: 34px; border-radius: 9px;
-  font: 500 .76rem/1 var(--font-body); color: #374151; background: #f3f4f6;
-  font-variant-numeric: tabular-nums;
-  transition: background .35s var(--ease), color .35s, transform .45s var(--spring), box-shadow .35s;
-}
-.slot.is-taken { color: #c4c8cf; background: repeating-linear-gradient(135deg, #f6f7f8 0 5px, #eef0f2 5px 10px); text-decoration: line-through; text-decoration-color: rgba(156, 163, 175, .5); }
-.js .slotcard .slot { opacity: 0; transform: translateY(6px) scale(.96); }
-.js .slotcard.is-live .slot { opacity: 1; transform: none; transition: opacity .4s var(--ease), transform .5s var(--spring), background .35s, color .35s, box-shadow .35s; transition-delay: calc(var(--i) * 28ms); }
-.js .slotcard.is-live .slot.is-hover { background: #fee2e2; color: #991b1b; transform: scale(1.06); transition-delay: 0s; }
-.js .slotcard.is-live .slot.is-picked { background: linear-gradient(120deg, #ef4444, #b91c1c); color: #fff; transform: scale(1.1); box-shadow: 0 10px 20px -8px rgba(185, 28, 28, .7); transition-delay: 0s; }
-.slotcard__foot { display: flex; align-items: center; gap: 10px; margin-top: 16px; padding-top: 14px; border-top: 1px solid #f0f1f3; font: 600 .85rem/1.2 var(--font-body); color: #15803d; }
-.slotcard__ok { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #dcfce7; }
-.slotcard__ok svg { width: 13px; height: 13px; fill: none; stroke: #16a34a; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 22; stroke-dashoffset: 22; }
-.js .slotcard__foot { opacity: 0; transform: translateY(6px); transition: opacity .4s var(--ease), transform .5s var(--spring); }
-.js .slotcard.is-done .slotcard__foot { opacity: 1; transform: none; }
-.js .slotcard.is-done .slotcard__ok svg { animation: draw .45s var(--ease) .15s forwards; }
-html:not(.js) .slotcard__ok svg { stroke-dashoffset: 0; }
-@media (max-width: 860px) {
-  .cta__inner--split { grid-template-columns: 1fr; text-align: center; }
-  .cta__inner--split .hero__actions { justify-content: center; }
-  .slotcard { justify-self: center; }
-}
-
-/* ==========================================================
    Contact form — personality
    ========================================================== */
 /* 1. a thin line draws around the field on focus; the label floats with a bounce */
@@ -1118,7 +1053,5 @@ html:not(.js) .slotcard__ok svg { stroke-dashoffset: 0; }
   .js .mark__word { opacity: 1; transform: none; }
   .js .mark__lines .o { opacity: 0; }
   .js .signature text { fill: var(--accent); stroke-dashoffset: 0; }
-  .js .slotcard .slot, .js .slotcard__foot { opacity: 1; transform: none; }
-  .slotcard { animation: none; }
 }
 #testimonials .section__head { max-width: 900px; text-align: left; }
