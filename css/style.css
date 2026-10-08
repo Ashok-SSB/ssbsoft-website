@@ -1091,3 +1091,39 @@ html, body { overflow-x: clip; }
 /* the hero logo hands over to the nav logo: never two on screen */
 .hero__logo-wrap { transition: opacity .3s var(--ease); }
 .hero__logo-wrap.is-handed-off { opacity: 0; }
+
+/* ==========================================================
+   Mobile content — shorter hero line, swipeable stories,
+   founder story that opens on request. Desktop unchanged.
+   ========================================================== */
+.hero__sub-short, .cases__dots, .about__more { display: none; }
+@media (max-width: 600px) {
+  .hero__sub-long { display: none; }
+  .hero__sub-short { display: inline; }
+
+  /* success stories: one card at a time, swipe for the next */
+  .cases {
+    display: flex; gap: 14px; overflow-x: auto; overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: -16px; padding: 4px 16px 12px; scroll-padding-inline: 16px;
+  }
+  .cases::-webkit-scrollbar { display: none; }
+  .cases .case { flex: 0 0 86%; scroll-snap-align: start; }
+  .js .cases .case { opacity: 1; transform: none; animation: none; transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
+  .cases__dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+  .cases__dots i { width: 6px; height: 6px; border-radius: 3px; background: var(--line); transition: width .4s var(--ease), background .3s; }
+  .cases__dots i.is-on { width: 22px; background: var(--accent); }
+
+  /* founder story: first lines, then "Read more" */
+  .about__story {
+    max-height: 7.6em; overflow: clip; transition: max-height .6s var(--ease);
+    -webkit-mask-image: linear-gradient(#000 45%, transparent); mask-image: linear-gradient(#000 45%, transparent);
+  }
+  .about__story.is-open { -webkit-mask-image: none; mask-image: none; }
+  .about__more {
+    display: inline-flex; align-items: center; gap: 6px; margin: .25rem 0 0; padding: 10px 0;
+    border: 0; background: none; font: 600 .95rem var(--font-body); color: var(--accent); cursor: pointer;
+  }
+  .about__more svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; transition: transform .4s var(--ease); }
+  .about__more[aria-expanded="true"] svg { transform: rotate(180deg); }
+}

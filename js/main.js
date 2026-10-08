@@ -482,6 +482,41 @@
     new IntersectionObserver(([e]) => { atContact = e.isIntersecting; set(); }, { threshold: .05 }).observe(contactEl);
   }
 
+  /* ---------- Mobile: success stories swipe sideways, dots follow ---------- */
+  const cases = $(".cases");
+  if (cases) {
+    const cards = $$(".case", cases);
+    const dots = document.createElement("div");
+    dots.className = "cases__dots";
+    dots.setAttribute("aria-hidden", "true");
+    dots.innerHTML = cards.map(() => "<i></i>").join("");
+    cases.after(dots);
+    const marks = $$("i", dots);
+    let raf = 0;
+    const sync = () => {
+      raf = 0;
+      const mid = cases.scrollLeft + cases.clientWidth / 2;
+      let best = 0, dist = Infinity;
+      cards.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = i; } });
+      marks.forEach((m, i) => m.classList.toggle("is-on", i === best));
+    };
+    cases.addEventListener("scroll", () => { if (!raf) raf = requestAnimationFrame(sync); }, { passive: true });
+    sync();
+  }
+
+  /* ---------- Mobile: founder story opens on request ---------- */
+  const more = $(".about__more"), story = $(".about__story");
+  if (more && story) {
+    more.addEventListener("click", () => {
+      const open = !story.classList.contains("is-open");
+      story.style.maxHeight = story.scrollHeight + "px";
+      story.classList.toggle("is-open", open);
+      if (!open) requestAnimationFrame(() => { story.style.maxHeight = ""; });
+      more.setAttribute("aria-expanded", open);
+      more.firstChild.textContent = open ? "Read less " : "Read more ";
+    });
+  }
+
   /* ---------- Print: show everything ---------- */
   addEventListener("beforeprint", () => {
     $$(".faq details").forEach((d) => { d.dataset.wasOpen = d.open; d.open = true; });
